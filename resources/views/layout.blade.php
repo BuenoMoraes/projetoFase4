@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
         <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Home</a>
-        <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Livros</a>
+        <a class="navbar navbar-expand-lg" href="{{ route('listar_livros') }}">Livros</a>
         <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Reservas</a>
         <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Usuários</a>
         

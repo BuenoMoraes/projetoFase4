@@ -12,9 +12,21 @@
 */
 Route::get('/series', 'SeriesController@index')
     ->name('listar_series');
+Route::get('/livros', 'LivrosController@index')
+    ->name('listar_livros');
+Route::get('/reservas', 'ReservasController@index')
+    ->name('listar_reservas');
+Route::get('/usuarios', 'UsuariosController@index')
+    ->name('listar_usuarios');
+
 Route::get('/series/criar', 'SeriesController@create')
     ->name('form_criar_serie')
     ->middleware('autenticador');
+Route::get('/livros/criar', 'LivrosController@create')
+    ->name('form_criar_livro')
+    ->middleware('autenticador');
+
+
 Route::post('/series/criar', 'SeriesController@store')
     ->middleware('autenticador');
 Route::delete('/series/{id}', 'SeriesController@destroy')
