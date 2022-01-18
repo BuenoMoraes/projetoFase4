@@ -29,8 +29,15 @@ Route::get('/livros/criar', 'LivrosController@create')
 
 Route::post('/series/criar', 'SeriesController@store')
     ->middleware('autenticador');
+Route::post('/livros/criar', 'LivrosController@store')
+    ->middleware('autenticador');
+
+
 Route::delete('/series/{id}', 'SeriesController@destroy')
     ->middleware('autenticador');
+Route::delete('/livros/{id}', 'LivrosController@destroy')
+    ->middleware('autenticador');
+
 Route::get('/series/{serieId}/temporadas', 'TemporadasController@index');
 Route::post('/series/{id}/editaNome', 'SeriesController@editaNome')
     ->middleware('autenticador');

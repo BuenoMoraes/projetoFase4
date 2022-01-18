@@ -4,21 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Episodio;
 use App\Http\Requests\SeriesFormRequest;
+use App\Http\Requests\LivrosFormRequest;
 use App\Serie;
+use App\Livro;
 use App\Services\CriadorDeSerie;
+use App\Services\CriadorDeLivro;
 use App\Services\RemovedorDeSerie;
+use App\Services\RemovedorDeLivro;
 use App\Temporada;
 use Illuminate\Http\Request;
 
 class LivrosController extends Controller
 {
     public function index(Request $request) {
-        $series = Serie::query()
-            ->orderBy('nome')
+        $livros = Livro::query()
+            ->orderBy('titulo')
             ->get();
         $mensagem = $request->session()->get('mensagem');
 
-        return view('livros.index', compact('series', 'mensagem'));
+        return view('livros.index', compact('livros', 'mensagem'));
     }
 
     public function create()
@@ -27,32 +31,34 @@ class LivrosController extends Controller
     }
 
     public function store(
-        SeriesFormRequest $request,
-        CriadorDeSerie $criadorDeSerie
+        LivrosFormRequest $request,
+        CriadorDeLivro $criadorDeLivro 
     ) {
-        $serie = $criadorDeSerie->criarSerie(
-            $request->nome,
-            $request->qtd_temporadas,
-            $request->ep_por_temporada
+        $livro  = $criadorDeLivro ->criarLivro(
+            $request->titulo,
+            $request->autor,
+            $request->anoPublicacao,
+            $request->statusLivro
         );
 
         $request->session()
             ->flash(
                 'mensagem',
-                "Série {$serie->id} e suas temporadas e episódios criados com sucesso {$serie->nome}"
+                "Lívro com id {$livro->id} e título {$livro->titulo} criado com sucesso "
             );
 
         return redirect()->route('listar_livros');
     }
 
-    public function destroy(Request $request, RemovedorDeSerie $removedorDeSerie)
+    public function destroy(Request $request, RemovedorDeLivro $removedorDeLivro)
     {
-        $nomeSerie = $removedorDeSerie->removerSerie($request->id);
+        $tituloLivro = $removedorDeLivro->removerLivro($request->id);
         $request->session()
             ->flash(
                 'mensagem',
-                "Série $nomeSerie removida com sucesso"
+                "Lívro $tituloLivro removido com sucesso"
             );
+
         return redirect()->route('listar_livros');
     }
 

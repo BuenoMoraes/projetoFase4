@@ -9,7 +9,7 @@ Séries
 @include('mensagem', ['mensagem' => $mensagem])
 
 @auth
-<a href="{{ route('form_criar_livro') }}" class="btn btn-dark mb-2">Adicionar Livro</a>
+<a href="{{ route('form_criar_serie') }}" class="btn btn-dark mb-2">Adicionar Livro</a>
 @endauth
 
 <ul class="list-group">
