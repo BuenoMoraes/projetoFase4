@@ -38,6 +38,8 @@ Route::delete('/series/{id}', 'SeriesController@destroy')
 Route::delete('/livros/{id}', 'LivrosController@destroy')
     ->middleware('autenticador');
 
+
+
 Route::get('/series/{serieId}/temporadas', 'TemporadasController@index');
 Route::post('/series/{id}/editaNome', 'SeriesController@editaNome')
     ->middleware('autenticador');

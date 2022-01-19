@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-Séries
+Home Biblioteca
 @endsection
 
 @section('conteudo')
@@ -9,7 +9,7 @@ Séries
 @include('mensagem', ['mensagem' => $mensagem])
 
 @auth
-<a href="{{ route('form_criar_serie') }}" class="btn btn-dark mb-2">Adicionar Livro</a>
+<a href="{{ route('form_criar_serie') }}" class="btn btn-dark mb-2">Adicionar</a>
 @endauth
 
 <ul class="list-group">
