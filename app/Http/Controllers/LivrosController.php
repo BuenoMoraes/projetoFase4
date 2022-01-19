@@ -61,11 +61,17 @@ class LivrosController extends Controller
         return redirect()->route('listar_livros');
     }
 
-    public function editaNome(int $id, Request $request)
+    public function PagEditaLivro(Request $request)
     {
-        $serie = Serie::find($id);
-        $novoNome = $request->nome;
-        $serie->nome = $novoNome;
-        $serie->save();
+        return view('livros.');
+    }
+
+
+    public function editalivro(int $id, Request $request)
+    {
+        $livro = Livro::find($id);
+        $novotitulo = $request->titulo;
+        $livro->titulo = $novotitulo;
+        $livro->save();
     }
 }

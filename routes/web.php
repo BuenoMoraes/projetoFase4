@@ -32,12 +32,25 @@ Route::post('/series/criar', 'SeriesController@store')
 Route::post('/livros/criar', 'LivrosController@store')
     ->middleware('autenticador');
 
+Route::get('/livros/{id}/editar', 'LivrosController@editaLivro')
+    ->name('form_editar_livro')
+    ->middleware('autenticador');
 
 Route::delete('/series/{id}', 'SeriesController@destroy')
     ->middleware('autenticador');
 Route::delete('/livros/{id}', 'LivrosController@destroy')
     ->middleware('autenticador');
 
+Route::get('/entrar', 'EntrarController@index'); 
+Route::post('/entrar', 'EntrarController@entrar'); 
+Route::get('/registrar', 'RegistroController@create');
+Route::post('/registrar', 'RegistroController@store');
+
+Route::get('/sair', function () {
+
+    Auth::logout();
+    return redirect('/entrar');
+});
 
 
 Route::get('/series/{serieId}/temporadas', 'TemporadasController@index');
@@ -51,13 +64,3 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/entrar', 'EntrarController@index'); 
-Route::post('/entrar', 'EntrarController@entrar'); 
-Route::get('/registrar', 'RegistroController@create');
-Route::post('/registrar', 'RegistroController@store');
-
-Route::get('/sair', function () {
-
-    Auth::logout();
-    return redirect('/entrar');
-});
