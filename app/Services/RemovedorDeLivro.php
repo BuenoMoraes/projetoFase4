@@ -10,7 +10,7 @@ class RemovedorDeLivro
     {
         $tituloLivro = '';
         DB::transaction(function () use ($LivroId, &$tituloLivro) {
-            $livro = Livro::find($tituloLivro);
+            $livro = Livro::find($LivroId);
             $tituloLivro = $livro->titulo;
             $autorLivro = $livro->autor;
             $anoPublicacaoLivro = $livro->anoPublicacao;
