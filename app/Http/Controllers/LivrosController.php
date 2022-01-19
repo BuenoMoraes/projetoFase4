@@ -34,14 +34,13 @@ class LivrosController extends Controller
         LivrosFormRequest $request,
         CriadorDeLivro $criadorDeLivro 
     ) {
-        $livro  = $criadorDeLivro ->criarLivro(
-            $request->titulo,
-            $request->autor,
-            $request->anoPublicacao,
-            $request->statusLivro
-        );
-
-        $request->session()
+        $livro  = $criadorDeLivro->criarLivro([
+            'titulo' => $request->titulo,
+            'autor' => $request->autor,
+            'anoPublicacao' => $request->anoPublicacao,
+            'statusLivro' => $request->statusLivro
+        ]);
+            $request->session()
             ->flash(
                 'mensagem',
                 "Lívro com id {$livro->id} e título {$livro->titulo} criado com sucesso "
