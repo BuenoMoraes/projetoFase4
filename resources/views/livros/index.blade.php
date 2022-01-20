@@ -27,7 +27,7 @@ Livros
         </div>
         <span class="d-flex">
             @auth
-            <a href="{{ route('form_editar_livro') }}" class="btn btn-info btn-sm mr-1">
+            <a href="#" class="btn btn-info btn-sm mr-1">
                 <i class="fas fa-external-link-alt"></i>
             </a>
             @endauth

@@ -9,15 +9,15 @@ use App\Services\RemovedorDeLivro;
 use App\Temporada;
 use Illuminate\Http\Request;
 
-class LivrosController extends Controller
+class ReservasController extends Controller
 {
     public function index(Request $request) {
         $livros = Livro::query()
-            ->orderBy('titulo')
+            ->orderBy('nomeUsuario')
             ->get();
         $mensagem = $request->session()->get('mensagem');
 
-        return view('livros.index', compact('livros', 'mensagem'));
+        return view('reservas.index', compact('livros', 'mensagem'));
     }
 
     public function create()
