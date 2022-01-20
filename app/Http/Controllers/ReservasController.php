@@ -2,63 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LivrosFormRequest;
+use App\Http\Requests\ReservasFormRequest;
 use App\Livro;
-use App\Services\CriadorDeLivro;
-use App\Services\RemovedorDeLivro;
+use App\Reserva;
+use App\Services\CriadorDeReserva;
+use App\Services\RemovedorDeReserva;
 use App\Temporada;
 use Illuminate\Http\Request;
 
 class ReservasController extends Controller
 {
     public function index(Request $request) {
-        $livros = Livro::query()
+        $reservas = Reserva::query()
             ->orderBy('nomeUsuario')
             ->get();
         $mensagem = $request->session()->get('mensagem');
 
-        return view('reservas.index', compact('livros', 'mensagem'));
+        return view('reservas.index', compact('reservas', 'mensagem'));
     }
 
     public function create()
     {
-        return view('livros.create');
+        return view('reservas.create');
     }
 
     public function store(
-        LivrosFormRequest $request,
-        CriadorDeLivro $criadorDeLivro 
+        ReservasFormRequest $request,
+        CriadorDeReserva $criadorDeReserva 
     ) {
-        $livro  = $criadorDeLivro->criarLivro([
-            'titulo' => $request->titulo,
-            'autor' => $request->autor,
-            'anoPublicacao' => $request->anoPublicacao,
-            'statusLivro' => $request->statusLivro
+        $reserva  = $criadorDeReserva->criarReserva([
+            'nomeUsuario' => $request->nomeUsuario,
+            'nomeLivro' => $request->nomeLivro,
+            'inicio' => $request->inicio,
+            'termino' => $request->termino
         ]);
             $request->session()
             ->flash(
                 'mensagem',
-                "Lívro com id {$livro->id} e título {$livro->titulo} criado com sucesso "
+                "Reserva com id {$reserva->id}, livro {$reserva->nomeLivro} e usuário {$reserva->nomeUsuario} criado com sucesso "
             );
 
-        return redirect()->route('listar_livros');
+        return redirect()->route('listar_reservas');
     }
 
-    public function destroy(Request $request, RemovedorDeLivro $removedorDeLivro)
+    public function destroy(Request $request, RemovedorDeReserva $removedorDeReserva)
     {
-        $tituloLivro = $removedorDeLivro->removerLivro($request->id);
+        $nomeLivroReserva = $removedorDeReserva->removerReserva($request->id);
         $request->session()
             ->flash(
                 'mensagem',
-                "Lívro $tituloLivro removido com sucesso"
+                "Reserva $nomeLivroReserva removido com sucesso"
             );
 
-        return redirect()->route('listar_livros');
+        return redirect()->route('listar_reservas');
     }
 
     public function PagEditaLivro(Request $request)
     {
-        return view('livros.');
+        return view('livros.editar');
     }
 
 

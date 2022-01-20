@@ -20,7 +20,7 @@ class EntrarController extends Controller
                 ->withErrors('Usuário e/ou senha incorretos');
         }
 
-        return redirect()->route('listar_series');
+        return redirect()->route('listar_livros');
 
     }
 }

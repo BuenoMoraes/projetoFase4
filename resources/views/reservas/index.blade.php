@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-Livros
+Reservas
 @endsection
 
 @section('conteudo')
@@ -9,15 +9,15 @@ Livros
 @include('mensagem', ['mensagem' => $mensagem])
 
 @auth
-<a href="{{ route('form_criar_livro') }}" class="btn btn-dark mb-2">Adicionar Livro</a>
+<a href="{{ route('form_criar_reserva') }}" class="btn btn-dark mb-2">Adicionar Reserva</a>
 @endauth
 
 <ul class="list-group">
-    @foreach($livros as $livro)
+    @foreach($reservas as $reserva)
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span id="titulo-livro-{{ $livro->id }}">Título: {{ $livro->titulo }} </br> Autor: {{ $livro->autor }}</br>Ano Publicação: {{ $livro->anoPublicacao }}</br>Status Livro: {{ $livro->statusLivro }}</span>
-        <div class="input-group w-50" hidden id="input-titulo-livro-{{ $livro->id }}">
-            <input type="text" class="form-control" value="{{ $livro->titulo }}">
+        <span id="nomeUsuario-reserva-{{ $reserva->id }}"> Nome Usuário: {{$reserva->nomeUsuario }} </br>Título Livro: {{ $reserva->nomeLivro }}</br>Inicio: {{ $reserva->inicio }}</br>Término: {{ $reserva->termino }} </span>
+        <div class="input-group w-50" hidden id="input-nomeUsuario-reserva-{{ $reserva->id }}">
+            <input type="text" class="form-control" value="{{ $reserva->nomeUsuario }}">
             <div class="input-group-append">
                 <button class="btn btn-primary">
                     <i class="fas fa-check"></i>
@@ -32,8 +32,8 @@ Livros
             </a>
             @endauth
             @auth
-            <form method="post" action="/livros/{{ $livro->id }}"
-                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($livro->titulo) }}?')">
+            <form method="post" action="/reservas/{{ $reserva->id }}"
+                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($reserva->nomeUsuario) }}?')">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger btn-sm">

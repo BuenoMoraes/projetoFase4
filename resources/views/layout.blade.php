@@ -11,10 +11,10 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-2 d-flex justify-content-between">
-        <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Home</a>
+        <a class="navbar navbar-expand-lg" href="{{ route('listar_livros') }}">Home</a>
         <a class="navbar navbar-expand-lg" href="{{ route('listar_livros') }}">Livros</a>
-        <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Reservas</a>
-        <a class="navbar navbar-expand-lg" href="{{ route('listar_series') }}">Usuários</a>
+        <a class="navbar navbar-expand-lg" href="{{ route('listar_reservas') }}">Reservas</a>
+        <a class="navbar navbar-expand-lg" href="{{ route('listar_livros') }}">Usuários</a>
         
         @auth
             <a href="/sair" class="text-danger">Sair</a>

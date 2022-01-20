@@ -10,8 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/series', 'SeriesController@index')
-    ->name('listar_series');
+
 Route::get('/livros', 'LivrosController@index')
     ->name('listar_livros');
 Route::get('/reservas', 'ReservasController@index')
@@ -25,11 +24,15 @@ Route::get('/series/criar', 'SeriesController@create')
 Route::get('/livros/criar', 'LivrosController@create')
     ->name('form_criar_livro')
     ->middleware('autenticador');
-
+Route::get('/reservas/criar', 'ReservasController@create')
+    ->name('form_criar_reserva')
+    ->middleware('autenticador');
 
 Route::post('/series/criar', 'SeriesController@store')
     ->middleware('autenticador');
 Route::post('/livros/criar', 'LivrosController@store')
+    ->middleware('autenticador');
+Route::post('/reservas/criar', 'ReservasController@store')
     ->middleware('autenticador');
 
 Route::get('/livros/{id}/editar', 'LivrosController@editaLivro')
@@ -40,6 +43,9 @@ Route::delete('/series/{id}', 'SeriesController@destroy')
     ->middleware('autenticador');
 Route::delete('/livros/{id}', 'LivrosController@destroy')
     ->middleware('autenticador');
+Route::delete('/reservas/{id}', 'ReservasController@destroy')
+    ->middleware('autenticador');
+    
 
 Route::get('/entrar', 'EntrarController@index'); 
 Route::post('/entrar', 'EntrarController@entrar'); 
