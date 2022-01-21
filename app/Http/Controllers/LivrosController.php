@@ -56,10 +56,6 @@ class LivrosController extends Controller
         return redirect()->route('listar_livros');
     }
 
-    public function PagEditaLivro(Request $request)
-    {
-        return view('livros.');
-    }
 
 
     public function editalivro(int $id, Request $request)

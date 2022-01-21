@@ -15,12 +15,10 @@ Route::get('/livros', 'LivrosController@index')
     ->name('listar_livros');
 Route::get('/reservas', 'ReservasController@index')
     ->name('listar_reservas');
-Route::get('/usuarios', 'UsuariosController@index')
+Route::get('/registro', 'RegistroController@index')
     ->name('listar_usuarios');
 
-Route::get('/series/criar', 'SeriesController@create')
-    ->name('form_criar_serie')
-    ->middleware('autenticador');
+
 Route::get('/livros/criar', 'LivrosController@create')
     ->name('form_criar_livro')
     ->middleware('autenticador');
@@ -28,8 +26,6 @@ Route::get('/reservas/criar', 'ReservasController@create')
     ->name('form_criar_reserva')
     ->middleware('autenticador');
 
-Route::post('/series/criar', 'SeriesController@store')
-    ->middleware('autenticador');
 Route::post('/livros/criar', 'LivrosController@store')
     ->middleware('autenticador');
 Route::post('/reservas/criar', 'ReservasController@store')
@@ -39,13 +35,12 @@ Route::get('/livros/{id}/editar', 'LivrosController@editaLivro')
     ->name('form_editar_livro')
     ->middleware('autenticador');
 
-Route::delete('/series/{id}', 'SeriesController@destroy')
-    ->middleware('autenticador');
 Route::delete('/livros/{id}', 'LivrosController@destroy')
     ->middleware('autenticador');
 Route::delete('/reservas/{id}', 'ReservasController@destroy')
     ->middleware('autenticador');
-    
+Route::delete('/registro/{id}', 'RegistroController@destroy')
+    ->middleware('autenticador');   
 
 Route::get('/entrar', 'EntrarController@index'); 
 Route::post('/entrar', 'EntrarController@entrar'); 
@@ -59,14 +54,6 @@ Route::get('/sair', function () {
 });
 
 
-Route::get('/series/{serieId}/temporadas', 'TemporadasController@index');
-Route::post('/series/{id}/editaNome', 'SeriesController@editaNome')
-    ->middleware('autenticador');
-Route::get('/temporadas/{temporada}/episodios', 'EpisodiosController@index');
-
-Route::post('/temporadas/{temporada}/episodios/assistir', 'EpisodiosController@assistir')
-    ->middleware('autenticador');
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 

@@ -1,7 +1,7 @@
 <?php
 namespace App\Services;
 
-use App\{Serie, Temporada, Episodio, Livro, Reserva};
+use App\{Livro, Reserva};
 use Illuminate\Support\Facades\DB;
 
 class RemovedorDeReserva
