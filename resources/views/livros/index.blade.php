@@ -16,6 +16,7 @@ Livros
     @foreach($livros as $livro)
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <span id="titulo-livro-{{ $livro->id }}">Título: {{ $livro->titulo }} </br> Autor: {{ $livro->autor }}</br>Ano Publicação: {{ $livro->anoPublicacao }}</br>Status Livro: {{ $livro->statusLivro }}</span>
+        
         <div class="input-group w-50" hidden id="input-titulo-livro-{{ $livro->id }}">
             <input type="text" class="form-control" value="{{ $livro->titulo }}">
             <div class="input-group-append">
@@ -27,9 +28,9 @@ Livros
         </div>
         <span class="d-flex">
             @auth
-            <a href="#" class="btn btn-info btn-sm mr-1">
-                <i class="fas fa-external-link-alt"></i>
-            </a>
+            <button class="btn btn-info btn-sm mr-1" onclick="toggleInput({{ $livro->id }})">
+                <i class="fas fa-edit"></i>
+            </button>
             @endauth
             @auth
             <form method="post" action="/livros/{{ $livro->id }}"

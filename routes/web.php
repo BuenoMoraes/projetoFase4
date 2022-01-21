@@ -11,6 +11,7 @@
 |
 */
 
+/*Rotas Telas Apresentações */
 Route::get('/livros', 'LivrosController@index')
     ->name('listar_livros');
 Route::get('/reservas', 'ReservasController@index')
@@ -18,7 +19,7 @@ Route::get('/reservas', 'ReservasController@index')
 Route::get('/registro', 'RegistroController@index')
     ->name('listar_usuarios');
 
-
+/*Rotas Telas criação dados*/
 Route::get('/livros/criar', 'LivrosController@create')
     ->name('form_criar_livro')
     ->middleware('autenticador');
@@ -26,15 +27,21 @@ Route::get('/reservas/criar', 'ReservasController@create')
     ->name('form_criar_reserva')
     ->middleware('autenticador');
 
+/*Rotas Adicionar valores ao banco*/
 Route::post('/livros/criar', 'LivrosController@store')
     ->middleware('autenticador');
 Route::post('/reservas/criar', 'ReservasController@store')
     ->middleware('autenticador');
 
-Route::get('/livros/{id}/editar', 'LivrosController@editaLivro')
-    ->name('form_editar_livro')
+/* 
+Route::get('/livros/editar', 'LivrosController@edit')
+    ->name('formteste')
     ->middleware('autenticador');
+*/
 
+Route::post('/series/{id}/editaLivro', 'LivrosController@editaLivro');
+
+/*Rotas deletar dados banco*/
 Route::delete('/livros/{id}', 'LivrosController@destroy')
     ->middleware('autenticador');
 Route::delete('/reservas/{id}', 'ReservasController@destroy')
@@ -42,6 +49,7 @@ Route::delete('/reservas/{id}', 'ReservasController@destroy')
 Route::delete('/registro/{id}', 'RegistroController@destroy')
     ->middleware('autenticador');   
 
+/*Rotas Autenticação de Usuário e criaçãos */
 Route::get('/entrar', 'EntrarController@index'); 
 Route::post('/entrar', 'EntrarController@entrar'); 
 Route::get('/registrar', 'RegistroController@create');

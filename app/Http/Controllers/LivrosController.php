@@ -57,11 +57,13 @@ class LivrosController extends Controller
     }
 
 
-
     public function editalivro(int $id, Request $request)
     {
         $livro = Livro::find($id);
         $novotitulo = $request->titulo;
+        $novoautor = $request->autor;
+        $novoAnoPublicacao = $request->anoPublicacao;
+        $novoStatusLivro = $request->statusLivro ;
         $livro->titulo = $novotitulo;
         $livro->save();
     }
