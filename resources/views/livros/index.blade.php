@@ -19,8 +19,11 @@ Livros
         
         <div class="input-group w-50" hidden id="input-titulo-livro-{{ $livro->id }}">
             <input type="text" class="form-control" value="{{ $livro->titulo }}">
+            <input type="text" class="form-control" value="{{ $livro->autor }}">
+            <input type="text" class="form-control" value="{{ $livro->anoPublicacao }}">
+            <input type="text" class="form-control" value="{{ $livro->statusLivro }}">
             <div class="input-group-append">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary"  onclick="editaLivro({{ $livro->id }})">
                     <i class="fas fa-check"></i>
                 </button>
                 @csrf

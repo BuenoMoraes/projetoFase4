@@ -14,10 +14,15 @@
 /*Rotas Telas Apresentações */
 Route::get('/livros', 'LivrosController@index')
     ->name('listar_livros');
+
 Route::get('/reservas', 'ReservasController@index')
     ->name('listar_reservas');
+
 Route::get('/registro', 'RegistroController@index')
     ->name('listar_usuarios');
+
+Route::get('/Home', 'HomeController@index')
+    ->name('home_inicial');
 
 /*Rotas Telas criação dados*/
 Route::get('/livros/criar', 'LivrosController@create')
@@ -39,7 +44,8 @@ Route::get('/livros/editar', 'LivrosController@edit')
     ->middleware('autenticador');
 */
 
-Route::post('/series/{id}/editaLivro', 'LivrosController@editaLivro');
+Route::post('/registro/{id}/editaNome', 'RegistroController@editaNome')
+    ->middleware('autenticador');
 
 /*Rotas deletar dados banco*/
 Route::delete('/livros/{id}', 'LivrosController@destroy')

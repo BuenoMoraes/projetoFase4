@@ -47,4 +47,13 @@ class RegistroController extends Controller
 
         return redirect()->route('listar_usuarios');
     }
+
+    public function editaNome(int $id, Request $request)
+    {
+        $usuario = User::find($id);
+        $novoNome = $request->name;
+        $novoEmail = $request->email;
+        $usuario->name = $novoNome;
+        $usuario->save();
+    }
 }
