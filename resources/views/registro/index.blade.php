@@ -19,6 +19,7 @@ Usuários
         
         <div class="input-group w-50" hidden id="input-name-usuario-{{ $usuario->id }}">
             <input type="text" class="form-control" value="{{ $usuario->name }}">
+            <input type="text" class="form-control" value="{{ $usuario->email }}">
             <div class="input-group-append">
                 <button class="btn btn-primary" onclick="editarUsuario({{ $usuario->id }})">
                     <i class="fas fa-check"></i>
@@ -73,8 +74,8 @@ Usuários
         formData.append('_token', token);
         const url = `/registro/${usuarioId}/editaNome`;
         fetch(url, {
-            method: 'POST',
-            body: formData
+                method: 'POST',
+                body: formData
         }).then(() => {
             toggleInput(usuarioId);
             document.getElementById(`name-usuario-${usuarioId}`).textContent = name;

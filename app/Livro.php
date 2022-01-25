@@ -9,7 +9,4 @@ class Livro extends Model
     public $timestamps = false;
     protected $fillable = ['titulo', 'autor', 'anoPublicacao', 'statusLivro'];
 
-
-
-
 }

@@ -10,22 +10,22 @@
 <form method="post">
     @csrf
     <label for="titulo">Título</label>
-    <input type="text" class="form-control" name="titulo" id="titulo">
+    <input type="text" class="form-control" name="titulo" id="titulo" maxlength="255">
 
     <div class="row mt-2">
         <div class="col col-6">
             <label for="autor">Autor</label>
-            <input type="text" class="form-control" name="autor" id="autor">
+            <input type="text" class="form-control" name="autor" id="autor" maxlength="255">
         </div>
 
         <div class="col col-3">
             <label for="anoPublicacao">Ano Publicação</label>
-            <input type="text" class="form-control" name="anoPublicacao" id="anoPublicacao">
+            <input type="text" class="form-control" name="anoPublicacao" id="anoPublicacao" maxlength="255">
         </div>
 
         <div class="col col-3">
             <label for="statusLivro">Status Lívro</label>
-            <input type="text" class="form-control" name="statusLivro" id="statusLivro">
+            <input type="text" class="form-control" name="statusLivro" id="statusLivro" maxlength="255">
         </div>
     </div>
 

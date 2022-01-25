@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Services\RemovedorDeUsuario;
+use App\Http\Requests\RegistrosFormRequest;
+
 
 class RegistroController extends Controller
 {
@@ -24,14 +26,22 @@ class RegistroController extends Controller
         return view('registro.create');
     }
 
-    public function store(Request $request)
+    public function store(RegistrosFormRequest $request)
     {
         $data = $request->except('_token');
         /*Criptografia*/ 
         $data['password'] = Hash::make($data['password']);
         $user = User::create($data);
 
+        $request->session()
+        ->flash(
+            'mensagem',
+            "Usuário com id {$user->id} e nome {$user->name} criado com sucesso "
+        );
+        
         Auth::login($user);
+
+       
 
         return redirect()->route('listar_usuarios');
     }
@@ -53,7 +63,15 @@ class RegistroController extends Controller
         $usuario = User::find($id);
         $novoNome = $request->name;
         $novoEmail = $request->email;
-        $usuario->name = $novoNome;
+        if(strlen($novoNome)> 2){
+            $usuario->name = $novoNome;
+        }else{
+            $request->session()
+            ->flash(
+                'mensagem',
+                "Tente novamente com um nome válido, ou seja,  com mais de 2 caracteres"
+            );
+        }
         $usuario->save();
     }
 }
