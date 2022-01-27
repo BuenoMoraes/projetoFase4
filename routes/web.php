@@ -44,6 +44,10 @@ Route::get('/livros/editar', 'LivrosController@edit')
     ->middleware('autenticador');
 */
 
+Route::get('/registro/edit/{id}', 'RegistroController@edit')
+    ->middleware('autenticador');
+
+
 Route::post('/registro/{id}/editaNome', 'RegistroController@editaNome')
     ->middleware('autenticador');
 

@@ -11,7 +11,7 @@
     @csrf
     <div class="form-group">
         <label for="name">Nome</label>
-        <input type="text" name="name" id="name"  class="form-control" maxlength="255">
+        <input type="text" name="name" id="name"  class="form-control" maxlength="255" value = "{{ $usuario->name}}">
     </div>
 
     <div class="form-group">
@@ -28,4 +28,5 @@
         Entrar
     </button>
 </form>
+
 @endsection

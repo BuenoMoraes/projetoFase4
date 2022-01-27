@@ -24,10 +24,10 @@ class ReservasFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nomeUsuario' => 'required|min:3',
-            'nomeLivro' => 'required|min:2',
-            'inicio' => 'required|min:10, max:10',
-            'termino' => 'required|min:10, max:10'
+            'nomeUsuario' => 'required|min:3|max:255',
+            'nomeLivro' => 'required|min:2|max:255',
+            'inicio' => 'required|min:10|max:10',
+            'termino' => 'required|min:10|max:10'
         ];
     }
 

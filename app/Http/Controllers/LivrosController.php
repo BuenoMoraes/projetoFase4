@@ -61,14 +61,15 @@ class LivrosController extends Controller
     {
         $livro = Livro::find($id);
         $novoStatusLivro = $request->statusLivro ;
-        if((strlen($novoStatusLivro)> 6) && (strlen($novoStatusLivro)< 12)  ){
-            $livro->statusLivro = $novoStatusLivro;
-        }else{
+        if(($novoStatusLivro != "Disponível") && ($novoStatusLivro != "Alugado")  ){
             $request->session()
             ->flash(
                 'mensagem',
-                "Tente novamente com um status válido, ou seja, alugado ou disponível"
+                "Tente novamente com um status válido, ou seja, Alugado ou Disponível"
             );
+        }else{
+            $livro->statusLivro = $novoStatusLivro;
+       
         }
         
         $livro->save();

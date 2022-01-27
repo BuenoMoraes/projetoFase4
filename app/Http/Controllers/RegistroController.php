@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Services\RemovedorDeUsuario;
 use App\Http\Requests\RegistrosFormRequest;
+use Exception;
 
 
 class RegistroController extends Controller
@@ -58,11 +59,20 @@ class RegistroController extends Controller
         return redirect()->route('listar_usuarios');
     }
 
+    public function edit(int $id){
+        $usuario = User::find($id);
+
+        if(!$usuario){
+            throw new Exception("Usuário não encontrado");
+        }
+        
+        return view('registro.create', compact('usuario'));
+    }
+
     public function editaNome(int $id, Request $request)
     {
         $usuario = User::find($id);
         $novoNome = $request->name;
-        $novoEmail = $request->email;
         if(strlen($novoNome)> 2){
             $usuario->name = $novoNome;
         }else{

@@ -18,7 +18,7 @@ Reservas
         <span id="nomeUsuario-reserva-{{ $reserva->id }}"> Nome Usuário: {{$reserva->nomeUsuario }} </br>Título Livro: {{ $reserva->nomeLivro }}</br>Inicio: {{ $reserva->inicio }}</br>Término: {{ $reserva->termino }} </span>
 
         <div class="input-group w-50" hidden id="input-nomeUsuario-reserva-{{ $reserva->id }}">
-            <input type="text" class="form-control" value="{{ $reserva->nomeUsuario }}">
+            <p>Término:</p><input type="text" class="form-control" value="{{ $reserva->termino }}">
             <div class="input-group-append">
                 <button class="btn btn-primary" onclick="editarUsuario({{ $reserva->id }})">
                     <i class="fas fa-check"></i>
@@ -63,13 +63,13 @@ Reservas
 
     function editarUsuario(reservaId) {
         let formData = new FormData();
-        const nomeUsuario = document
+        const termino = document
             .querySelector(`#input-nomeUsuario-reserva-${reservaId} > input`)
             .value;
         const token = document
             .querySelector(`input[name="_token"]`)
             .value;
-        formData.append('nomeUsuario', nomeUsuario);
+        formData.append('termino', termino);
         formData.append('_token', token);
         const url = `/reservas/${reservaId}/editaNome`;
         fetch(url, {
@@ -77,7 +77,7 @@ Reservas
                 body: formData
         }).then(() => {
             toggleInput(reservaId);
-            document.getElementById(`nomeUsuario-reserva-${reservaId}`).textContent = nomeUsuario;
+            document.getElementById(`nomeUsuario-reserva-${reservaId}`).textContent = termino;
         });
     }
 </script>

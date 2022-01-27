@@ -60,9 +60,9 @@ class ReservasController extends Controller
     public function editaNome(int $id, Request $request)
     {
         $reserva = Reserva::find($id);
-        $novoNome = $request->nomeUsuario;
-        if(strlen($novoNome)> 2){
-            $reserva->nomeUsuario = $novoNome;
+        $novoTermino = $request->termino;
+        if((strlen($novoTermino)> 9) && (strlen($novoTermino)< 11) ){
+            $reserva->termino = $novoTermino;
         }else{
             $request->session()
             ->flash(
