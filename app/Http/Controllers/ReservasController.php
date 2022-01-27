@@ -57,17 +57,19 @@ class ReservasController extends Controller
         return redirect()->route('listar_reservas');
     }
 
-    public function PagEditaLivro(Request $request)
+    public function editaNome(int $id, Request $request)
     {
-        return view('livros.editar');
-    }
-
-
-    public function editalivro(int $id, Request $request)
-    {
-        $livro = Livro::find($id);
-        $novotitulo = $request->titulo;
-        $livro->titulo = $novotitulo;
-        $livro->save();
+        $reserva = Reserva::find($id);
+        $novoNome = $request->nomeUsuario;
+        if(strlen($novoNome)> 2){
+            $reserva->nomeUsuario = $novoNome;
+        }else{
+            $request->session()
+            ->flash(
+                'mensagem',
+                "Tente novamente com um nome válido, ou seja,  com mais de 2 caracteres"
+            );
+        }
+        $reserva->save();
     }
 }

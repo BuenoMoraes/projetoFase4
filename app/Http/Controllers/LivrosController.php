@@ -57,14 +57,20 @@ class LivrosController extends Controller
     }
 
 
-    public function editalivro(int $id, Request $request)
+    public function editaLivro(int $id, Request $request)
     {
         $livro = Livro::find($id);
-        $novotitulo = $request->titulo;
-        $novoautor = $request->autor;
-        $novoAnoPublicacao = $request->anoPublicacao;
         $novoStatusLivro = $request->statusLivro ;
-        $livro->titulo = $novotitulo;
+        if((strlen($novoStatusLivro)> 6) && (strlen($novoStatusLivro)< 12)  ){
+            $livro->statusLivro = $novoStatusLivro;
+        }else{
+            $request->session()
+            ->flash(
+                'mensagem',
+                "Tente novamente com um status válido, ou seja, alugado ou disponível"
+            );
+        }
+        
         $livro->save();
     }
 }

@@ -47,6 +47,13 @@ Route::get('/livros/editar', 'LivrosController@edit')
 Route::post('/registro/{id}/editaNome', 'RegistroController@editaNome')
     ->middleware('autenticador');
 
+Route::post('/livros/{id}/editaLivro', 'LivrosController@editaLivro')
+    ->middleware('autenticador');
+
+Route::post('/reservas/{id}/editaNome', 'ReservasController@editaNome')
+    ->middleware('autenticador');
+
+
 /*Rotas deletar dados banco*/
 Route::delete('/livros/{id}', 'LivrosController@destroy')
     ->middleware('autenticador');
