@@ -1,49 +1,71 @@
 @extends('layout')
 
 @section('cabecalho')
-Livros
+    Atualizar Usuário
 @endsection
 
 @section('conteudo')
+@include('erros', ['errors' => $errors])
 
-@include('mensagem', ['mensagem' => $mensagem])
-
-@auth
-<a href="{{ route('form_criar_livro') }}" class="btn btn-dark mb-2">Adicionar Livro</a>
-@endauth
-
-<ul class="list-group">
-    @foreach($livros as $livro)
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span id="titulo-livro-{{ $livro->id }}">{{ $livro->titulo }}</span>
-        <div class="input-group w-50" hidden id="input-titulo-livro-{{ $livro->id }}">
-            <input type="text" class="form-control" value="{{ $livro->titulo }}">
-            <div class="input-group-append">
-                <button class="btn btn-primary">
-                    <i class="fas fa-check"></i>
-                </button>
-                @csrf
-            </div>
+<form method="post">
+    @csrf
+    <div class="form-group" id="input-titulo-livro-{{ $livro->id }}">
+        <label for="titulo">Título</label>
+        <input type="text" class="form-control" name="titulo" id="titulo" maxlength="255" value="{{ $livro->titulo }}">
+    </div>
+    <div class="row mt-2" >
+        <div class="col col-6" id="input-autor-livro-{{ $livro->id }}">
+            <label for="autor">Autor</label>
+            <input type="text" class="form-control" name="autor" id="autor" maxlength="255" value="{{ $livro->autor }}">
         </div>
-        <span class="d-flex">
-            @auth
-            <a href="#" class="btn btn-info btn-sm mr-1">
-                <i class="fas fa-external-link-alt"></i>
-            </a>
-            @endauth
-            @auth
-            <form method="post" action="/livros/{{ $livro->id }}"
-                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($livro->titulo) }}?')">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger btn-sm">
-                    <i class="far fa-trash-alt"></i>
-                </button>
-            </form>
-            @endauth
-        </span>
-    </li>
-    @endforeach
-</ul>
-        
+
+        <div class="col col-3" id="input-anoPublicacao-livro-{{ $livro->id }}">
+            <label for="anoPublicacao">Ano Publicação</label>
+            <input type="text" class="form-control" name="anoPublicacao" id="anoPublicacao" maxlength="255" value="{{ $livro->anoPublicacao }}">
+        </div>
+
+        <div class="col col-3" id="input-status-livro-{{ $livro->id }}">
+            <label for="statusLivro">Status Lívro</label>
+            <input type="text" class="form-control" name="statusLivro" id="statusLivro" maxlength="255" value="{{ $livro->statusLivro }}">
+        </div>
+    </div>
+
+    <button onclick="editarLivro({{ $livro->id }})" type="submit" class="btn btn-primary mt-3">
+        Atualizar
+    </button>
+</form>
+
+<script>
+   function editarLivro(livroId) {
+        let formData = new FormData();
+        const titulo = document
+            .querySelector(`#input-titulo-livro-${livroId} > input`)
+            .value;
+        const autor = document
+            .querySelector(`#input-autor-livro-${livroId} > input`)
+            .value;
+        const anoPublicacao = document
+            .querySelector(`#input-anoPublicacao-livro-${livroId} > input`)
+            .value;
+        const statusLivro = document
+            .querySelector(`#input-status-livro-${livroId} > input`)
+            .value;
+        const token = document
+            .querySelector(`input[name="_token"]`)
+            .value;
+        formData.append('titulo', titulo);
+        formData.append('autor', autor);
+        formData.append('anoPublicacao', anoPublicacao);
+        formData.append('statusLivro', statusLivro);
+        formData.append('_token', token);
+        const url =`/registro/${livroId}/editaLivro`;
+        fetch(url, {
+                method: 'POST',
+                body: formData
+        }).then(() => {
+            document.getElementById(`status-livro-${livroId}`).textContent = titulo;
+        });
+    }
+</script>
+
 @endsection

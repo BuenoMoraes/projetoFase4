@@ -56,22 +56,41 @@ class LivrosController extends Controller
         return redirect()->route('listar_livros');
     }
 
+    public function edit(int $id){
+        $livro = Livro::find($id);
+
+        if(!$livro){
+            throw new Exception("Livro não encontrado");
+        }
+        
+        return view('livros.editar', compact('livro'));
+    }
+
+
 
     public function editaLivro(int $id, Request $request)
     {
         $livro = Livro::find($id);
-        $novoStatusLivro = $request->statusLivro ;
-        if(($novoStatusLivro != "Disponível") && ($novoStatusLivro != "Alugado")  ){
+        
+        $novoTitulo = $request->titulo;
+        $novoAutor = $request->autor;
+        $novoAnoPublicacao = $request->anoPublicacao;
+        $novoStatusLivro = $request->statusLivro;
+       /* if(($novoStatusLivro != "Disponível") && ($novoStatusLivro != "Alugado") && (strlen($novoAutor)<2) && (strlen($novoTitulo)<3) ){
             $request->session()
             ->flash(
                 'mensagem',
+                "Autor ou Titulo inválidos, verifique novamente",
                 "Tente novamente com um status válido, ou seja, Alugado ou Disponível"
-            );
-        }else{
+                );
+        }else{*/
+            $livro->titulo = $novoTitulo;
+            $livro->autor = $novoAutor;
+            $livro->anoPublicacao = $novoAnoPublicacao;
             $livro->statusLivro = $novoStatusLivro;
-       
-        }
-        
+           
+       // }
         $livro->save();
+        return redirect()->route('listar_livros');
     }
 }

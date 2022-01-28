@@ -66,15 +66,17 @@ class RegistroController extends Controller
             throw new Exception("Usuário não encontrado");
         }
         
-        return view('registro.create', compact('usuario'));
+        return view('registro.editar', compact('usuario'));
     }
 
-    public function editaNome(int $id, Request $request)
+    public function editaUsuario(int $id, Request $request)
     {
         $usuario = User::find($id);
         $novoNome = $request->name;
+        $novoEmail= $request->email;
         if(strlen($novoNome)> 2){
             $usuario->name = $novoNome;
+            $usuario->email = $novoEmail;
         }else{
             $request->session()
             ->flash(
@@ -83,5 +85,7 @@ class RegistroController extends Controller
             );
         }
         $usuario->save();
+
+        return redirect()->route('listar_usuarios');
     }
 }

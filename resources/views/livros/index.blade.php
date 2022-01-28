@@ -28,9 +28,9 @@ Livros
         </div>
         <span class="d-flex">
             @auth
-            <button class="btn btn-info btn-sm mr-1" onclick="toggleInput({{ $livro->id }})">
+            <a class="btn btn-info btn-sm mr-1" href="/livros/edit/{{ $livro->id }}">
                 <i class="fas fa-edit"></i>
-            </button>
+            </a>
             @endauth
             @auth
             <form method="post" action="/livros/{{ $livro->id }}"
