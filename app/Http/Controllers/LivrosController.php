@@ -8,6 +8,8 @@ use App\Services\CriadorDeLivro;
 use App\Services\RemovedorDeLivro;
 use App\Temporada;
 use Illuminate\Http\Request;
+use Exception;
+
 
 class LivrosController extends Controller
 {

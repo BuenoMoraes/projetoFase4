@@ -38,12 +38,7 @@ Route::post('/livros/criar', 'LivrosController@store')
 Route::post('/reservas/criar', 'ReservasController@store')
     ->middleware('autenticador');
 
-/* 
-Route::get('/livros/editar', 'LivrosController@edit')
-    ->name('formteste')
-    ->middleware('autenticador');
-*/
-
+/*Rotas e envio das atualizações*/ 
 Route::get('/registro/edit/{id}', 'RegistroController@edit')
     ->middleware('autenticador');
 Route::post('/registro/edit/{id}', 'RegistroController@editaUsuario')
@@ -52,6 +47,11 @@ Route::post('/registro/edit/{id}', 'RegistroController@editaUsuario')
 Route::get('/livros/edit/{id}', 'LivrosController@edit')
     ->middleware('autenticador');
 Route::post('/livros/edit/{id}', 'LivrosController@editaLivro')
+    ->middleware('autenticador');
+
+Route::get('/reservas/edit/{id}', 'ReservasController@edit')
+    ->middleware('autenticador');
+Route::post('/reservas/edit/{id}', 'ReservasController@editaLivro')
     ->middleware('autenticador');
 
 

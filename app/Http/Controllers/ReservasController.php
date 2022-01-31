@@ -9,6 +9,8 @@ use App\Services\CriadorDeReserva;
 use App\Services\RemovedorDeReserva;
 use App\Temporada;
 use Illuminate\Http\Request;
+use Exception;
+
 
 class ReservasController extends Controller
 {
@@ -57,6 +59,17 @@ class ReservasController extends Controller
         return redirect()->route('listar_reservas');
     }
 
+    public function edit(int $id){
+        $reserva = Reserva::find($id);
+
+        if(!$reserva){
+            throw new Exception("Reserva não encontrada");
+        }
+        
+        return view('Reservas.editar', compact('reserva'));
+    }
+
+    
     public function editaNome(int $id, Request $request)
     {
         $reserva = Reserva::find($id);

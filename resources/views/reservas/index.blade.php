@@ -29,9 +29,9 @@ Reservas
 
         <span class="d-flex">
             @auth
-            <button class="btn btn-info btn-sm mr-1" onclick="toggleInput({{ $reserva->id }})">
+            <a href="/reservas/edit/{{ $reserva->id }}" class="btn btn-info btn-sm mr-1">
                 <i class="fas fa-edit"></i>
-            </button>
+            </a>
             @endauth
             @auth
             <form method="post" action="/reservas/{{ $reserva->id }}"
@@ -47,38 +47,5 @@ Reservas
     </li>
     @endforeach
 </ul>
-
-<script>
-    function toggleInput(reservaId) {
-        const nomeUsuarioEl = document.getElementById(`nomeUsuario-reserva-${reservaId}`);
-        const inputUsuariosEl = document.getElementById(`input-nomeUsuario-reserva-${reservaId}`);
-        if (nomeUsuarioEl.hasAttribute('hidden')) {
-            nomeUsuarioEl.removeAttribute('hidden');
-            inputUsuariosEl.hidden = true;
-        } else {
-            inputUsuariosEl.removeAttribute('hidden');
-            nomeUsuarioEl.hidden = true;
-        }
-    }
-
-    function editarUsuario(reservaId) {
-        let formData = new FormData();
-        const termino = document
-            .querySelector(`#input-nomeUsuario-reserva-${reservaId} > input`)
-            .value;
-        const token = document
-            .querySelector(`input[name="_token"]`)
-            .value;
-        formData.append('termino', termino);
-        formData.append('_token', token);
-        const url = `/reservas/${reservaId}/editaNome`;
-        fetch(url, {
-                method: 'POST',
-                body: formData
-        }).then(() => {
-            toggleInput(reservaId);
-            document.getElementById(`nomeUsuario-reserva-${reservaId}`).textContent = termino;
-        });
-    }
-</script>
+>
 @endsection
