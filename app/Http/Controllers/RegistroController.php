@@ -69,21 +69,15 @@ class RegistroController extends Controller
         return view('registro.editar', compact('usuario'));
     }
 
-    public function editaUsuario(int $id, Request $request)
+    public function editaUsuario(int $id, RegistrosFormRequest $request)
     {
         $usuario = User::find($id);
         $novoNome = $request->name;
         $novoEmail= $request->email;
-        if(strlen($novoNome)> 2){
-            $usuario->name = $novoNome;
-            $usuario->email = $novoEmail;
-        }else{
-            $request->session()
-            ->flash(
-                'mensagem',
-                "Tente novamente com um nome válido, ou seja,  com mais de 2 caracteres"
-            );
-        }
+
+        $usuario->name = $novoNome;
+        $usuario->email = $novoEmail;
+       
         $usuario->save();
 
         return redirect()->route('listar_usuarios');

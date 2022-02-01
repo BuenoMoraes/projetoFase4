@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-Livros
+Lívros
 @endsection
 
 @section('conteudo')
@@ -9,7 +9,7 @@ Livros
 @include('mensagem', ['mensagem' => $mensagem])
 
 @auth
-<a href="{{ route('form_criar_livro') }}" class="btn btn-dark mb-2">Adicionar Livro</a>
+<a href="{{ route('form_criar_livro') }}" class="btn btn-dark mb-2">Adicionar Lívro</a>
 @endauth
 
 <ul class="list-group">

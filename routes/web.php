@@ -21,8 +21,6 @@ Route::get('/reservas', 'ReservasController@index')
 Route::get('/registro', 'RegistroController@index')
     ->name('listar_usuarios');
 
-Route::get('/Home', 'HomeController@index')
-    ->name('home_inicial');
 
 /*Rotas Telas criação dados*/
 Route::get('/livros/criar', 'LivrosController@create')
@@ -51,7 +49,7 @@ Route::post('/livros/edit/{id}', 'LivrosController@editaLivro')
 
 Route::get('/reservas/edit/{id}', 'ReservasController@edit')
     ->middleware('autenticador');
-Route::post('/reservas/edit/{id}', 'ReservasController@editaLivro')
+Route::post('/reservas/edit/{id}', 'ReservasController@editaReserva')
     ->middleware('autenticador');
 
 
@@ -75,7 +73,4 @@ Route::get('/sair', function () {
     return redirect('/entrar');
 });
 
-
-
-Route::get('/home', 'HomeController@index')->name('home');
 

@@ -25,7 +25,10 @@ class LivrosFormRequest extends FormRequest
     {
         return [
             'titulo' => 'required|min:2',
-            'autor' => 'required|min:3'
+            'autor' => 'required|min:3',
+            'anoPublicacao' => 'required|min:4',
+            'statusLivro' => 'required|min:7|max:10'
+
         ];
     }
 
@@ -34,7 +37,10 @@ class LivrosFormRequest extends FormRequest
         return [
             'required' => 'O campo :attribute é obrigatório',
             'titulo.min' => 'O campo titulo precisa ter pelo menos 2 caracteres',
-            'autor.min' => 'O campo autor precisa ter pelo menos 3 caracteres'
+            'autor.min' => 'O campo autor precisa ter pelo menos 3 caracteres',
+            'anoPublicacao.min' => 'O campo ano publicação precisa ter pelo menos 4 caracteres',
+            'statusLivro.min' => 'O campo status livro precisa ter pelo menos 7 caracteres',
+            'statusLivro.max' => 'O campo status livro precisa ter no máximo 10 caracteres'
         ];
     }
 }

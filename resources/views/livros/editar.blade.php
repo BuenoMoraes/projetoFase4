@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('cabecalho')
-    Atualizar Usuário
+    Atualizar Lívro
 @endsection
 
 @section('conteudo')
@@ -62,8 +62,6 @@
         fetch(url, {
                 method: 'POST',
                 body: formData
-        }).then(() => {
-            document.getElementById(`status-livro-${livroId}`).textContent = titulo;
         });
     }
 </script>

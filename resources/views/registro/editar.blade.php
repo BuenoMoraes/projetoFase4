@@ -43,8 +43,6 @@
         fetch(url, {
                 method: 'POST',
                 body: formData
-        }).then(() => {
-            document.getElementById(`status-livro-${livroId}`).textContent = nome;
         });
     }
 </script>

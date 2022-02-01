@@ -70,19 +70,20 @@ class ReservasController extends Controller
     }
 
     
-    public function editaNome(int $id, Request $request)
+    public function editaReserva(int $id, ReservasFormRequest  $request)
     {
         $reserva = Reserva::find($id);
+        $novoNomeUsuario = $request->nomeUsuario;
+        $novoNomeLivro = $request->nomeLivro;
+        $novoInicio = $request->inicio;
         $novoTermino = $request->termino;
-        if((strlen($novoTermino)> 9) && (strlen($novoTermino)< 11) ){
-            $reserva->termino = $novoTermino;
-        }else{
-            $request->session()
-            ->flash(
-                'mensagem',
-                "Tente novamente com um nome válido, ou seja,  com mais de 2 caracteres"
-            );
-        }
+
+        $reserva->nomeUsuario = $novoNomeUsuario;
+        $reserva->nomeLivro = $novoNomeLivro;
+        $reserva->inicio = $novoInicio;
+        $reserva->termino = $novoTermino;
+       
         $reserva->save();
+        return redirect()->route('listar_reservas');
     }
 }

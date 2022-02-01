@@ -32,7 +32,7 @@
         </div>
     </div>
 
-    <button onclick="editarUsuario({{ $reserva->id }})" type="submit" class="btn btn-primary mt-3">
+    <button onclick="editarReserva({{ $reserva->id }})" type="submit" class="btn btn-primary mt-3">
         Atualizar
     </button>
 </form>
@@ -40,24 +40,30 @@
 <script>
    function editarReserva(reservaId) {
         let formData = new FormData();
-        const name = document
-            .querySelector(`#input-nome-usuario-${usuarioId} > input`)
+        const nomeUsuario = document
+            .querySelector(`#input-nomeUsuario-reserva-${reservaId} > input`)
             .value;
-        const email = document
-            .querySelector(`#input-email-usuario-${usuarioId} > input`)
+        const nomeLivro = document
+            .querySelector(`#input-nomeLivro-reserva-${reservaId} > input`)
+            .value;
+        const inicio = document
+            .querySelector(`#input-inicio-reserva-${reservaId} > input`)
+            .value;
+        const termino = document
+            .querySelector(`#input-termino-reserva-${reservaId} > input`)
             .value;
         const token = document
             .querySelector(`input[name="_token"]`)
             .value;
-        formData.append('name', name);
-        formData.append('email', email);
+        formData.append('nomeUsuario', nomeUsuario);
+        formData.append('nomeLivro', nomeLivro);
+        formData.append('inicio', inicio);
+        formData.append('termino', termino);
         formData.append('_token', token);
-        const url =`/registro/${usuarioId}/editaUsuario`;
+        const url =`/registro/${reservaId}/editaReserva`;
         fetch(url, {
                 method: 'POST',
                 body: formData
-        }).then(() => {
-            document.getElementById(`status-livro-${livroId}`).textContent = nome;
         });
     }
 </script>
