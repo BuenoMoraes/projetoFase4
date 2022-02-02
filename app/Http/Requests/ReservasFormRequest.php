@@ -35,7 +35,7 @@ class ReservasFormRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório',
-            'nomeUsuario.min' => 'O campo nome Usuario precisa ter pelo menos 3 caracteres',
+            'nomeUsuario.min' => 'O campo nome usuário precisa ter pelo menos 3 caracteres',
             'nomeLivro.min' => 'O campo nome Livro precisa ter pelo menos 2 caracteres',
             'inicio.min' => 'O campo inicio precisa ter no mínimo 10 caracteres, siga o exemplo', 
             'inicio.max' => 'O campo inicio precisa ter no máximo 10 caracteres, siga o exemplo',
