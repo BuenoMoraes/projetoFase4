@@ -23,13 +23,13 @@ class CriadorDeLivro
     public function criarLivro(array $informacoes): Livro 
     {
         $titulo = isset($informacoes['titulo']) ? $informacoes['titulo'] : null;
-        $autor = $informacoes['autor'] ?? null;
+        $autorId = $informacoes['autor_id'] ?? null;
         $anoPublicacao = $informacoes['anoPublicacao'] ?? null;
-        $statusLivro = $informacoes['statusLivro'] ?? null;
+        $statusId = $informacoes['status_id'] ?? null;
         
         
         DB::beginTransaction();
-        $livro = Livro::create(['titulo' => $titulo, 'autor' => $autor, 'anoPublicacao' => $anoPublicacao, 'statusLivro' => $statusLivro ]);
+        $livro = Livro::create(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId ]);
         DB::commit();
 
         return $livro;

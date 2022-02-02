@@ -15,7 +15,11 @@
     <div class="row mt-2">
         <div class="col col-6">
             <label for="autor">Autor</label>
-            <input type="text" class="form-control" name="autor" id="autor" maxlength="255">
+            <select class="form-control" name="autor_id" id="autor_id">
+                <option value=""></option>
+                <option value="1">Paulo Coelho</option>
+            </select>
+            <!-- <input type="text" class="form-control" name="autor" id="autor" maxlength="255"> -->
         </div>
 
         <div class="col col-3">
@@ -24,8 +28,13 @@
         </div>
 
         <div class="col col-3">
-            <label for="statusLivro">Status Lívro</label>
-            <input type="text" class="form-control" name="statusLivro" id="statusLivro" maxlength="255">
+            <label for="status_id">Status Lívro</label>
+            <select class="form-control" name="status_id" id="status_id">
+                <option value=""></option>
+                <option value="1">Alugado</option>
+                <option value="2">Disponível</option>
+            </select>
+            <!-- <input type="text" class="form-control" name="statusLivro" id="statusLivro" maxlength="255"> -->
         </div>
     </div>
 

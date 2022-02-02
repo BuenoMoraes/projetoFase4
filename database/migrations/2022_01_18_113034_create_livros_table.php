@@ -15,10 +15,12 @@ class CreateLivrosTable extends Migration
     {
         Schema::create('livros', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('autor_id')->unsigned();
+            $table->foreign('autor_id')->references('id')->on('autores');
+            $table->bigInteger('status_id')->unsigned();
+            $table->foreign('status_id')->references('id')->on('status');
             $table->string('titulo', 255);
-            $table->string('autor', 255);
             $table->string('anoPublicacao', 255);
-            $table->string('statusLivro', 255);
         });
     }
 

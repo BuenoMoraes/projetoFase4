@@ -25,9 +25,9 @@ class LivrosFormRequest extends FormRequest
     {
         return [
             'titulo' => 'required|min:2',
-            'autor' => 'required|min:3',
-            'anoPublicacao' => 'required|min:4',
-            'statusLivro' => 'required|min:7|max:10'
+            'anoPublicacao' => 'required|min:4'
+            //'autor' => 'required|min:3',
+            //'statusLivro' => 'required|min:7|max:10'
 
         ];
     }

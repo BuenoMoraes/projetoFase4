@@ -15,10 +15,14 @@ class CreateTabelaReservas extends Migration
     {
         Schema::create('reservas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nomeUsuario', 255);
-            $table->string('nomeLivro', 255);
+            $table->bigInteger('usuario_id')->unsigned();
+            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->bigInteger('livro_id')->unsigned();
+            $table->foreign('livro_id')->references('id')->on('livros');
             $table->string('inicio', 255);
             $table->string('termino', 255);
+
+            
         });
     }
 

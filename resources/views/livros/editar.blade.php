@@ -15,8 +15,11 @@
     </div>
     <div class="row mt-2" >
         <div class="col col-6" id="input-autor-livro-{{ $livro->id }}">
-            <label for="autor">Autor</label>
-            <input type="text" class="form-control" name="autor" id="autor" maxlength="255" value="{{ $livro->autor }}">
+            <select class="form-control" name="autor_id" id="autor_id">
+                <option value=""></option>
+                <option value="1">Paulo Coelho</option>
+            </select>
+            <!--<input type="text" class="form-control" name="autor" id="autor" maxlength="255" value="{{ $livro->autor }}"> -->
         </div>
 
         <div class="col col-3" id="input-anoPublicacao-livro-{{ $livro->id }}">
@@ -54,9 +57,9 @@
             .querySelector(`input[name="_token"]`)
             .value;
         formData.append('titulo', titulo);
-        formData.append('autor', autor);
+        formData.append('autor_id', autor_id);
         formData.append('anoPublicacao', anoPublicacao);
-        formData.append('statusLivro', statusLivro);
+        formData.append('status_id', status_id);
         formData.append('_token', token);
         const url =`/registro/${livroId}/editaLivro`;
         fetch(url, {
