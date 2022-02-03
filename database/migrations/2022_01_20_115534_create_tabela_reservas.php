@@ -19,8 +19,8 @@ class CreateTabelaReservas extends Migration
             $table->foreign('usuario_id')->references('id')->on('users');
             $table->bigInteger('livro_id')->unsigned();
             $table->foreign('livro_id')->references('id')->on('livros');
-            $table->string('inicio', 255);
-            $table->string('termino', 255);
+            $table->date('inicio');
+            $table->date('termino');
 
             
         });

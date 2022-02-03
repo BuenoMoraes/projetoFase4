@@ -4,16 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Autor extends Model
 {
     public $timestamps = false;
-    protected $fillable = ['status'];
+    protected $fillable = ['autor'];
 
     public static function fetchPairs()
     {
         return self::query()
-        ->orderBy('id') 
+        ->orderBy('autor') 
         ->get();
-
     }
 }

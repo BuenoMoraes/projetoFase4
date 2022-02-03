@@ -9,14 +9,14 @@ class CriadorDeReserva
 {
     public function criarReserva(array $informacoes): Reserva 
     {
-        $nomeUsuario = isset($informacoes['nomeUsuario']) ? $informacoes['nomeUsuario'] : null;
-        $nomeLivro = isset($informacoes['nomeLivro']) ? $informacoes['nomeLivro'] : null;
+        $usuarioId = isset($informacoes['usuario_id']) ? $informacoes['usuario_id'] : null;
+        $livroId = isset($informacoes['livro_id']) ? $informacoes['livro_id'] : null;
         $inicio = $informacoes['inicio'] ?? null;
         $termino = $informacoes['termino'] ?? null;
         
         
         DB::beginTransaction();
-        $reserva = Reserva::create(['nomeUsuario' => $nomeUsuario, 'nomeLivro' => $nomeLivro, 'inicio' => $inicio, 'termino' => $termino ]);
+        $reserva = Reserva::create(['usuario_id' => $usuarioId, 'livro_id' => $livroId, 'inicio' => $inicio, 'termino' => $termino ]);
         DB::commit();
 
         return $reserva;

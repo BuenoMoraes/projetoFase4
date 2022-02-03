@@ -16,7 +16,7 @@ class ReservasController extends Controller
 {
     public function index(Request $request) {
         $reservas = Reserva::query()
-            ->orderBy('nomeUsuario')
+            ->orderBy('usuario_id')
             ->get();
         $mensagem = $request->session()->get('mensagem');
 
@@ -33,15 +33,15 @@ class ReservasController extends Controller
         CriadorDeReserva $criadorDeReserva 
     ) {
         $reserva  = $criadorDeReserva->criarReserva([
-            'nomeUsuario' => $request->nomeUsuario,
-            'nomeLivro' => $request->nomeLivro,
+            'usuario_id' => $request->usuario_id,
+            'livro_id' => $request->livro_id,
             'inicio' => $request->inicio,
             'termino' => $request->termino
         ]);
             $request->session()
             ->flash(
                 'mensagem',
-                "Reserva com id {$reserva->id}, livro {$reserva->nomeLivro} e usuário {$reserva->nomeUsuario} criado com sucesso "
+                "Reserva com id {$reserva->id}, livro {$reserva->livro_id} e usuário {$reserva->usuario_id} criado com sucesso "
             );
 
         return redirect()->route('listar_reservas');
@@ -73,12 +73,12 @@ class ReservasController extends Controller
     public function editaReserva(int $id, ReservasFormRequest  $request)
     {
         $reserva = Reserva::find($id);
-        $novoNomeUsuario = $request->nomeUsuario;
+        $novoNomeUsuario = $request->usuario_id;
         $novoNomeLivro = $request->nomeLivro;
         $novoInicio = $request->inicio;
         $novoTermino = $request->termino;
 
-        $reserva->nomeUsuario = $novoNomeUsuario;
+        $reserva->usuario_id = $novoNomeUsuario;
         $reserva->nomeLivro = $novoNomeLivro;
         $reserva->inicio = $novoInicio;
         $reserva->termino = $novoTermino;

@@ -6,6 +6,8 @@
 
 @section('conteudo')
 @include('erros', ['errors' => $errors])
+<!--{{var_dump($autor)}}-->
+
 
 <form method="post">
     @csrf
@@ -17,7 +19,9 @@
             <label for="autor">Autor</label>
             <select class="form-control" name="autor_id" id="autor_id">
                 <option value=""></option>
-                <option value="1">Paulo Coelho</option>
+                @foreach ($autor as $autor)
+                <option value="{{$autor->id}}">{{$autor->autor}}</option>
+                @endforeach
             </select>
             <!-- <input type="text" class="form-control" name="autor" id="autor" maxlength="255"> -->
         </div>
@@ -40,4 +44,5 @@
 
     <button class="btn btn-primary mt-2">Adicionar</button>
 </form>
+
 @endsection

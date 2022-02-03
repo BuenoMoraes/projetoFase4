@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTableStatus extends Migration
 {
+    private $tableName = 'statuses';
     /**
      * Run the migrations.
      *
@@ -13,9 +14,9 @@ class CreateTableStatus extends Migration
      */
     public function up()
     {
-        Schema::create('status', function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('status', 255);
+            $table->string('status', 255);//->unique()
         });
     }
 
@@ -26,6 +27,6 @@ class CreateTableStatus extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('status');
+        Schema::dropIfExists($this->tableName);
     }
 }

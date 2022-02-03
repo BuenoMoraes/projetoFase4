@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTableAutor extends Migration
 {
+    private $tableName = 'autors';
     /**
      * Run the migrations.
      *
@@ -13,9 +14,9 @@ class CreateTableAutor extends Migration
      */
     public function up()
     {
-        Schema::create('autores', function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('autor', 255);
+            $table->string('autor', 255);//->unique();
         });
     }
 
@@ -26,6 +27,6 @@ class CreateTableAutor extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('autores');
+        Schema::dropIfExists($this->tableName);
     }
 }

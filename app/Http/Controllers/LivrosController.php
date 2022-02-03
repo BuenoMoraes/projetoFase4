@@ -7,6 +7,7 @@ use App\Livro;
 use App\Services\CriadorDeLivro;
 use App\Services\RemovedorDeLivro;
 use App\Status;
+use App\Autor;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -17,15 +18,21 @@ class LivrosController extends Controller
         $livros = Livro::query()
             ->orderBy('titulo')
             ->get();
-        $status = Status::query();
+
+        $autor = Autor::fetchPairs();
+
+
         $mensagem = $request->session()->get('mensagem');
 
-        return view('livros.index', compact('livros', 'mensagem', 'status'));
+        return view('livros.index', compact('autor','livros', 'mensagem'));
     }
 
     public function create()
     {
-        return view('livros.create');
+        $autor = Autor::fetchPairs();
+        $status = Status::fetchPairs();
+
+        return view('livros.create', compact('autor', 'status'));
     }
 
     public function store(
@@ -38,13 +45,16 @@ class LivrosController extends Controller
             'anoPublicacao' => $request->anoPublicacao,
             'status_id' => $request->status_id
         ]);
+
             $request->session()
             ->flash(
                 'mensagem',
                 "Lívro com id {$livro->id} e título {$livro->titulo} criado com sucesso "
             );
+
+            
         
-        return redirect()->route('listar_livros');
+        return redirect()->route('listar_usuarios');
     }
 
     public function destroy(Request $request, RemovedorDeLivro $removedorDeLivro)
