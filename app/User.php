@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function fetchPairs()
+    {
+        return self::query()
+        ->orderBy('name') 
+        ->get();
+    }
 }

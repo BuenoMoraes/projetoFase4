@@ -16,16 +16,6 @@ Lívros
     @foreach($livros as $livro)
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <span id="status-livro-{{ $livro->id }}">Título: {{ $livro->titulo }} </br> Autor: {{ $livro->autor_id }}</br>Ano Publicação: {{ $livro->anoPublicacao }}</br>Status Livro: {{ $livro->status_id}}</span>
-        
-        <div class="input-group w-50" hidden id="input-titulo-livro-{{ $livro->id }}">
-            <input type="text" class="form-control" value="{{ $livro->status_id}}">
-            <div class="input-group-append">
-                <button class="btn btn-primary"  onclick="editarLivro({{ $livro->id }})">
-                    <i class="fas fa-check"></i>
-                </button>
-                @csrf
-            </div>
-        </div>
         <span class="d-flex">
             @auth
             <a class="btn btn-info btn-sm mr-1" href="/livros/edit/{{ $livro->id }}">

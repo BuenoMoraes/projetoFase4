@@ -15,9 +15,12 @@
     </div>
     <div class="row mt-2" >
         <div class="col col-6" id="input-autor-livro-{{ $livro->id }}">
+            <label for="autor">Autor</label>
             <select class="form-control" name="autor_id" id="autor_id">
                 <option value=""></option>
-                <option value="1">Paulo Coelho</option>
+                @foreach ($autor as $autor)
+                <option value="{{$autor->id}}">{{$autor->autor}}</option>
+                @endforeach
             </select>
             <!--<input type="text" class="form-control" name="autor" id="autor" maxlength="255" value="{{ $livro->autor }}"> -->
         </div>
@@ -29,7 +32,12 @@
 
         <div class="col col-3" id="input-status-livro-{{ $livro->id }}">
             <label for="statusLivro">Status Lívro</label>
-            <input type="text" class="form-control" name="statusLivro" id="statusLivro" maxlength="255" value="{{ $livro->statusLivro }}">
+            <select class="form-control" name="status_id" id="status_id">
+                <option value=""></option>
+                @foreach ($status as $status)
+                <option value="{{$status->id}}">{{$status->status}}</option>
+                @endforeach
+            </select>
         </div>
     </div>
 

@@ -7,7 +7,7 @@ use App\Livro;
 use App\Reserva;
 use App\Services\CriadorDeReserva;
 use App\Services\RemovedorDeReserva;
-use App\Temporada;
+use App\User;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -18,14 +18,20 @@ class ReservasController extends Controller
         $reservas = Reserva::query()
             ->orderBy('usuario_id')
             ->get();
+
+        $usuario = User::fetchPairs();
+        $livro = Livro::fetchPairs();
+        
         $mensagem = $request->session()->get('mensagem');
 
-        return view('reservas.index', compact('reservas', 'mensagem'));
+        return view('reservas.index', compact('reservas','usuario', 'livro' ,'mensagem'));
     }
 
     public function create()
     {
-        return view('reservas.create');
+        $usuario = User::fetchPairs();
+        $livro = Livro::fetchPairs();
+        return view('reservas.create', compact('usuario', 'livro'));
     }
 
     public function store(
@@ -60,13 +66,15 @@ class ReservasController extends Controller
     }
 
     public function edit(int $id){
+        $usuario = User::fetchPairs();
+        $livro = Livro::fetchPairs();
         $reserva = Reserva::find($id);
 
         if(!$reserva){
             throw new Exception("Reserva não encontrada");
         }
         
-        return view('Reservas.editar', compact('reserva'));
+        return view('Reservas.editar', compact('reserva', 'usuario', 'livro'));
     }
 
     
@@ -74,12 +82,12 @@ class ReservasController extends Controller
     {
         $reserva = Reserva::find($id);
         $novoNomeUsuario = $request->usuario_id;
-        $novoNomeLivro = $request->nomeLivro;
+        $novoNomeLivro = $request->livro_id;
         $novoInicio = $request->inicio;
         $novoTermino = $request->termino;
 
         $reserva->usuario_id = $novoNomeUsuario;
-        $reserva->nomeLivro = $novoNomeLivro;
+        $reserva->livro_id = $novoNomeLivro;
         $reserva->inicio = $novoInicio;
         $reserva->termino = $novoTermino;
        

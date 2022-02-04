@@ -10,25 +10,35 @@
 <form method="post">
     @csrf
     <div class="form-group" id="input-nomeUsuario-reserva-{{ $reserva->id }}">
-        <label for="name">Nome</label>
-        <input type="text" name="nomeUsuario" id="nomeUsuario"  class="form-control" maxlength="255" value = "{{ $reserva->nomeUsuario}}">
+        <label for="usuario_id">Nome</label>
+        <select class="form-control" name="usuario_id" id="usuario_id">
+            <option value=""></option>
+            @foreach ($usuario as $usuario)
+            <option value="{{$usuario->id}}">{{$usuario->name}}</option>
+            @endforeach
+        </select>
     </div>
 
 
     <div class="form-group" id="input-nomeLivro-reserva-{{ $reserva->id }}">
-        <label for="nomeLivro">Nome Livro</label>
-        <input type="text" class="form-control" name="nomeLivro" id="nomeLivro" maxlength="255" value = "{{ $reserva->nomeLivro}}">
+        <label for="livro_id">Nome Livro</label>
+        <select class="form-control" name="livro_id" id="livro_id">
+            <option value=""></option>
+            @foreach ($livro as $livro)
+            <option value="{{$livro->id}}">{{$livro->titulo}}</option>
+            @endforeach
+        </select>
     </div>
 
     <div class="row mt-2">
         <div class="col col-6" id="input-inicio-reserva-{{ $reserva->id }}">
             <label for="inicio">Inicio</label>
-            <input type="text" class="form-control" name="inicio" id="inicio" placeholder="DD/MM/AAAA" maxlength="255" value = "{{ $reserva->inicio}}">
+            <input type="date" class="form-control" name="inicio" id="inicio" placeholder="DD/MM/AAAA" maxlength="255" value = "{{ $reserva->inicio}}">
         </div>
 
         <div class="col col-6" id="input-termino-reserva-{{ $reserva->id }}">
             <label for="termino">Término</label>
-            <input type="text" class="form-control" name="termino" id="termino" placeholder="DD/MM/AAAA" maxlength="255" value = "{{ $reserva->termino}}">
+            <input type="date" class="form-control" name="termino" id="termino" placeholder="DD/MM/AAAA" maxlength="255" value = "{{ $reserva->termino}}">
         </div>
     </div>
 
@@ -55,8 +65,8 @@
         const token = document
             .querySelector(`input[name="_token"]`)
             .value;
-        formData.append('nomeUsuario', nomeUsuario);
-        formData.append('nomeLivro', nomeLivro);
+        formData.append('usuario_id', usuario_id);
+        formData.append('livro_id', livro_id);
         formData.append('inicio', inicio);
         formData.append('termino', termino);
         formData.append('_token', token);

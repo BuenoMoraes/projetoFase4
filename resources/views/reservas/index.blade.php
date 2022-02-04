@@ -15,18 +15,7 @@ Reservas
 <ul class="list-group">
     @foreach($reservas as $reserva)
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span id="nomeUsuario-reserva-{{ $reserva->id }}"> Nome Usuário: {{$reserva->nomeUsuario }} </br>Título Livro: {{ $reserva->nomeLivro }}</br>Inicio: {{ $reserva->inicio }}</br>Término: {{ $reserva->termino }} </span>
-
-        <div class="input-group w-50" hidden id="input-nomeUsuario-reserva-{{ $reserva->id }}">
-            <p>Término:</p><input type="text" class="form-control" value="{{ $reserva->termino }}">
-            <div class="input-group-append">
-                <button class="btn btn-primary" onclick="editarUsuario({{ $reserva->id }})">
-                    <i class="fas fa-check"></i>
-                </button>
-                @csrf
-            </div>
-        </div>
-
+        <span id="nomeUsuario-reserva-{{ $reserva->id }}"> Nome Usuário: {{$reserva->usuario_id }} </br>Título Livro: {{ $reserva->livro_id}}</br>Inicio: {{ $reserva->inicio }}</br>Término: {{ $reserva->termino }} </span>
         <span class="d-flex">
             @auth
             <a href="/reservas/edit/{{ $reserva->id }}" class="btn btn-info btn-sm mr-1">
@@ -35,7 +24,7 @@ Reservas
             @endauth
             @auth
             <form method="post" action="/reservas/{{ $reserva->id }}"
-                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($reserva->nomeUsuario) }}?')">
+                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($reserva->id) }}?')">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger btn-sm">

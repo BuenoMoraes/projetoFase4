@@ -35,8 +35,9 @@
             <label for="status_id">Status Lívro</label>
             <select class="form-control" name="status_id" id="status_id">
                 <option value=""></option>
-                <option value="1">Alugado</option>
-                <option value="2">Disponível</option>
+                @foreach ($status as $status)
+                <option value="{{$status->id}}">{{$status->status}}</option>
+                @endforeach
             </select>
             <!-- <input type="text" class="form-control" name="statusLivro" id="statusLivro" maxlength="255"> -->
         </div>

@@ -20,11 +20,12 @@ class LivrosController extends Controller
             ->get();
 
         $autor = Autor::fetchPairs();
+        $status = Status::fetchPairs();
 
 
         $mensagem = $request->session()->get('mensagem');
 
-        return view('livros.index', compact('autor','livros', 'mensagem'));
+        return view('livros.index', compact('autor', 'livros', 'status', 'mensagem'));
     }
 
     public function create()
@@ -70,13 +71,15 @@ class LivrosController extends Controller
     }
 
     public function edit(int $id){
+        $autor = Autor::fetchPairs();
+        $status = Status::fetchPairs();
         $livro = Livro::find($id);
 
         if(!$livro){
             throw new Exception("Livro não encontrado");
         }
         
-        return view('livros.editar', compact('livro'));
+        return view('livros.editar', compact('livro', 'autor', 'status'));
     }
 
 

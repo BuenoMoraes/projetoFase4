@@ -11,8 +11,8 @@ class RemovedorDeReserva
         $nomeLivroReserva = '';
         DB::transaction(function () use ($ReservaId, &$nomeLivroReserva) {
             $reserva = Reserva::find($ReservaId);
-            $nomeUsuarioReserva = $reserva->nomeUsuario;
-            $nomeLivroReserva = $reserva->nomeLivro;
+            $nomeUsuarioReserva = $reserva->usuario_id;
+            $nomeLivroReserva = $reserva->livro_id;
             $inicioReserva = $reserva->inicio;
             $terminoReserva = $reserva->termino;
             $reserva->delete();
