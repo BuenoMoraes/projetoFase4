@@ -15,19 +15,8 @@ Lívros
 <ul class="list-group">
     @foreach($livros as $livro)
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span id="status-livro-{{ $livro->id }}">Título: {{ $livro->titulo }} </br>Autor:
-        <?php
-        foreach($autor as $autor){
-            $y = $livro->autor_id;
-            $z = $autor->id;
-            if($z == $y){
-                echo $autor->autor;
-            }
-        }
-
-        $z = null;
-        $y = null;
-        ?>
+        <span id="status-livro-{{ $livro->id }}">Título: {{ $livro->titulo }} </br>Autor: {{$autor->where('id', $livro->autor_id)->pluck('autor')->first()}}
+       
         <br>Ano Publicação: {{ $livro->anoPublicacao }}</br>Status Livro: {{ $livro->status_id}}</span>
         <span class="d-flex">
             @auth

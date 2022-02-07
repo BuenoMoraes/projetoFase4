@@ -22,7 +22,6 @@
                 <option value="{{$autor->id}}">{{$autor->autor}}</option>
                 @endforeach
             </select>
-            <!--<input type="text" class="form-control" name="autor" id="autor" maxlength="255" value="{{ $livro->autor }}"> -->
         </div>
 
         <div class="col col-3" id="input-anoPublicacao-livro-{{ $livro->id }}">
