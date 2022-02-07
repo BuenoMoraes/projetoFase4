@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTabelaReservas extends Migration
 {
+    private $tableName = 'reservas';
     /**
      * Run the migrations.
      *
@@ -13,7 +14,7 @@ class CreateTabelaReservas extends Migration
      */
     public function up()
     {
-        Schema::create('reservas', function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('usuario_id')->unsigned();
             $table->foreign('usuario_id')->references('id')->on('users');
@@ -33,6 +34,6 @@ class CreateTabelaReservas extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reservas');
+        Schema::dropIfExists($this->tableName);
     }
 }

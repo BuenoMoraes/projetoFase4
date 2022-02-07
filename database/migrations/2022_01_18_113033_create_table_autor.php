@@ -16,7 +16,7 @@ class CreateTableAutor extends Migration
     {
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('autor', 255);//->unique();
+            $table->string('autor', 255)->unique();
         });
     }
 

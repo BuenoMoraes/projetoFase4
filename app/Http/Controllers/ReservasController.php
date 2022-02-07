@@ -59,7 +59,7 @@ class ReservasController extends Controller
         $request->session()
             ->flash(
                 'mensagem',
-                "Reserva $nomeLivroReserva removido com sucesso"
+                "Reserva removida com sucesso"
             );
 
         return redirect()->route('listar_reservas');

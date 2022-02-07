@@ -55,7 +55,7 @@ class LivrosController extends Controller
 
             
         
-        return redirect()->route('listar_usuarios');
+            return redirect()->route('listar_livros');
     }
 
     public function destroy(Request $request, RemovedorDeLivro $removedorDeLivro)
@@ -64,7 +64,7 @@ class LivrosController extends Controller
         $request->session()
             ->flash(
                 'mensagem',
-                "Lívro $tituloLivro removido com sucesso"
+                "Lívro removido com sucesso"
             );
 
         return redirect()->route('listar_livros');

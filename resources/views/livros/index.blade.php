@@ -15,7 +15,20 @@ Lívros
 <ul class="list-group">
     @foreach($livros as $livro)
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span id="status-livro-{{ $livro->id }}">Título: {{ $livro->titulo }} </br> Autor: {{ $livro->autor_id }}</br>Ano Publicação: {{ $livro->anoPublicacao }}</br>Status Livro: {{ $livro->status_id}}</span>
+        <span id="status-livro-{{ $livro->id }}">Título: {{ $livro->titulo }} </br>Autor:
+        <?php
+        foreach($autor as $autor){
+            $y = $livro->autor_id;
+            $z = $autor->id;
+            if($z == $y){
+                echo $autor->autor;
+            }
+        }
+
+        $z = null;
+        $y = null;
+        ?>
+        <br>Ano Publicação: {{ $livro->anoPublicacao }}</br>Status Livro: {{ $livro->status_id}}</span>
         <span class="d-flex">
             @auth
             <a class="btn btn-info btn-sm mr-1" href="/livros/edit/{{ $livro->id }}">
@@ -24,7 +37,7 @@ Lívros
             @endauth
             @auth
             <form method="post" action="/livros/{{ $livro->id }}"
-                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($livro->titulo) }}?')">
+                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($livro->id) }}?')">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger btn-sm">

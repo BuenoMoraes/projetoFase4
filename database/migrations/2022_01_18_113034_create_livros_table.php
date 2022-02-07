@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateLivrosTable extends Migration
 {
+    private $tableName = 'livros';
     /**
      * Run the migrations.
      *
@@ -13,7 +14,7 @@ class CreateLivrosTable extends Migration
      */
     public function up()
     {
-        Schema::create('livros', function (Blueprint $table) {
+        Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('autor_id')->unsigned();
             $table->foreign('autor_id')->references('id')->on('autors');
@@ -31,6 +32,6 @@ class CreateLivrosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('livros');
+        Schema::dropIfExists($this->tableName);
     }
 }
