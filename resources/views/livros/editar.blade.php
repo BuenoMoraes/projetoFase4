@@ -16,11 +16,14 @@
     <div class="row mt-2" >
         <div class="col col-6" id="input-autor-livro-{{ $livro->id }}">
             <label for="autor">Autor</label>
-            <select class="form-control" name="autor_id" id="autor_id">
-                <option value=""></option>
-                @foreach ($autor as $autor)
-                <option value="{{$autor->id}}">{{$autor->autor}}</option>
-                @endforeach
+            <select class="form-control" name="autor_id" id="autor_id" >
+                <option value="{{$livro->autor_id}}">{{$autor->where('id', $livro->autor_id)->pluck('autor')->first()}}</option>
+                    <?php
+                    foreach ($autor as $autor)
+                        if($autor->id != $livro->autor_id){
+                            ?><option value="{{$autor->id}}">{{$autor->autor}}</option><?php
+                        }
+                    ?>
             </select>
         </div>
 
@@ -32,10 +35,13 @@
         <div class="col col-3" id="input-status-livro-{{ $livro->id }}">
             <label for="statusLivro">Status Lívro</label>
             <select class="form-control" name="status_id" id="status_id">
-                <option value=""></option>
-                @foreach ($status as $status)
-                <option value="{{$status->id}}">{{$status->status}}</option>
-                @endforeach
+                <option  value="{{$livro->autor_id}}">{{$status->where('id', $livro->status_id)->pluck('status')->first()}}</option>
+                <?php
+                    foreach ($status as $status)
+                        if($status->id != $livro->status_id){
+                            ?><option value="{{$status->id}}">{{$status->status}}</option><?php
+                        }
+                    ?>
             </select>
         </div>
     </div>

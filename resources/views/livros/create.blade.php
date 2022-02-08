@@ -23,7 +23,6 @@
                 <option value="{{$autor->id}}">{{$autor->autor}}</option>
                 @endforeach
             </select>
-            <!-- <input type="text" class="form-control" name="autor" id="autor" maxlength="255"> -->
         </div>
 
         <div class="col col-3">
@@ -39,7 +38,6 @@
                 <option value="{{$status->id}}">{{$status->status}}</option>
                 @endforeach
             </select>
-            <!-- <input type="text" class="form-control" name="statusLivro" id="statusLivro" maxlength="255"> -->
         </div>
     </div>
 

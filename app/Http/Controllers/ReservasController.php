@@ -38,6 +38,8 @@ class ReservasController extends Controller
         ReservasFormRequest $request,
         CriadorDeReserva $criadorDeReserva 
     ) {
+        $usuario = User::fetchPairs();
+        $livro = Livro::fetchPairs();
         $reserva  = $criadorDeReserva->criarReserva([
             'usuario_id' => $request->usuario_id,
             'livro_id' => $request->livro_id,
@@ -47,7 +49,7 @@ class ReservasController extends Controller
             $request->session()
             ->flash(
                 'mensagem',
-                "Reserva com id {$reserva->id}, livro {$reserva->livro_id} e usuário {$reserva->usuario_id} criado com sucesso "
+                "Reserva com id {$reserva->id}, livro {$livro->where('id', $reserva->livro_id)->pluck('titulo')->first()} e usuário {$usuario->where('id', $reserva->usuario_id)->pluck('name')->first()} criado com sucesso "
             );
 
         return redirect()->route('listar_reservas');

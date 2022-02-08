@@ -12,10 +12,12 @@
     <div class="form-group" id="input-nomeUsuario-reserva-{{ $reserva->id }}">
         <label for="usuario_id">Nome</label>
         <select class="form-control" name="usuario_id" id="usuario_id">
-            <option value=""></option>
-            @foreach ($usuario as $usuario)
-            <option value="{{$usuario->id}}">{{$usuario->name}}</option>
-            @endforeach
+            <option value="{{$reserva->usuario_id}}">{{$usuario->where('id', $reserva->usuario_id)->pluck('name')->first()}}</option>
+            <?php
+            foreach ($usuario as $usuario)
+            if($usuario->id != $reserva->usuario_id){
+            ?><option value="{{$usuario->id}}">{{$usuario->name}}</option><?php
+            }?>
         </select>
     </div>
 
@@ -23,10 +25,12 @@
     <div class="form-group" id="input-nomeLivro-reserva-{{ $reserva->id }}">
         <label for="livro_id">Nome Livro</label>
         <select class="form-control" name="livro_id" id="livro_id">
-            <option value=""></option>
-            @foreach ($livro as $livro)
-            <option value="{{$livro->id}}">{{$livro->titulo}}</option>
-            @endforeach
+            <option value="{{$reserva->livro_id}}">{{$livro->where('id', $reserva->livro_id)->pluck('titulo')->first()}}</option>
+            <?php
+            foreach ($livro as $livro)
+            if($livro->id != $reserva->livro_id){
+            ?><option value="{{$livro->id}}">{{$livro->titulo}}</option><?php
+            }?>
         </select>
     </div>
 
