@@ -35,7 +35,7 @@
         <div class="col col-3" id="input-status-livro-{{ $livro->id }}">
             <label for="statusLivro">Status Lívro</label>
             <select class="form-control" name="status_id" id="status_id">
-                <option  value="{{$livro->autor_id}}">{{$status->where('id', $livro->status_id)->pluck('status')->first()}}</option>
+                <option  value="{{$livro->status_id}}">{{$status->where('id', $livro->status_id)->pluck('status')->first()}}</option>
                 <?php
                     foreach ($status as $status)
                         if($status->id != $livro->status_id){
