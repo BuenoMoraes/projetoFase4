@@ -24,10 +24,15 @@
                 @endforeach
             </select>
         </div>
-
+        <?php $years = range(1900, strftime("%Y", time())); ?>
         <div class="col col-3">
             <label for="anoPublicacao">Ano Publicação</label>
-            <input type="text" class="form-control" name="anoPublicacao" id="anoPublicacao" maxlength="255">
+            <select class="form-control" name="anoPublicacao" id="anoPublicacao">
+                <option>Select Year</option>
+                <?php foreach($years as $year) : ?>
+                <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
 
         <div class="col col-3">

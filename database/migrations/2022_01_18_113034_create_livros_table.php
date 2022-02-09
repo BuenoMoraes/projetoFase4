@@ -21,7 +21,7 @@ class CreateLivrosTable extends Migration
             $table->bigInteger('status_id')->unsigned();
             $table->foreign('status_id')->references('id')->on('statuses');
             $table->string('titulo', 255);
-            $table->string('anoPublicacao', 255);
+            $table->integer('anoPublicacao');
         });
     }
 

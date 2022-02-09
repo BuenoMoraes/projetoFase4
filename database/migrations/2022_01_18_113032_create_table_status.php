@@ -18,6 +18,20 @@ class CreateTableStatus extends Migration
             $table->bigIncrements('id');
             $table->string('status', 255)->unique();
         });
+
+        DB::table($this->tableName)->insert(
+            [
+                [
+                    'id' => 1,
+                    'status' => 'Alugado'
+                ],
+                [
+                    'id' => 2,
+                    'status' => 'Disponível'
+                ]
+
+            ]
+        );
     }
 
     /**

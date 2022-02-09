@@ -18,6 +18,21 @@ class CreateTableAutor extends Migration
             $table->bigIncrements('id');
             $table->string('autor', 255)->unique();
         });
+
+        DB::table($this->tableName)->insert(
+            [
+                [
+                    'id' => 1,
+                    'autor' => 'Fred Brooks'
+                ],
+                [
+                    'id' => 2,
+                    'autor' => 'Paulo Coelho'
+                ]
+
+            ]
+        
+        );
     }
 
     /**
