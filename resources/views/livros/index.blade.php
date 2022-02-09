@@ -27,7 +27,7 @@ Lívros
             @endauth
             @auth
             <form method="post" action="/livros/{{ $livro->id }}"
-                  onsubmit="return confirm('Tem certeza que deseja remover {{ addslashes($livro->titulo) }}?')">
+                  onsubmit="return confirm('Tem certeza que deseja remover o livro com título {{ addslashes($livro->titulo) }}?')">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger btn-sm">

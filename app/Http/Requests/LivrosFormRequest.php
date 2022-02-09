@@ -26,8 +26,8 @@ class LivrosFormRequest extends FormRequest
         return [
             'titulo' => 'required|min:2',
             'anoPublicacao' => 'required|min:4',
-            //'autor' => 'required',
-           // 'statusLivro' => 'required'
+            'autor_id' => 'required',
+            'status_id' => 'required'
 
         ];
     }
@@ -37,6 +37,8 @@ class LivrosFormRequest extends FormRequest
         return [
             'required' => 'O campo :attribute é obrigatório',
             'anoPublicacao.min' => 'O campo ano publicação precisa ter pelo menos 4 caracteres',
+            'autor_id.required' => 'O campo autor é obrigatório',
+            'status_id.required' => 'O campo status é obrigatório'
         ];
     }
 }

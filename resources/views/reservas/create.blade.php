@@ -16,16 +16,14 @@
         <option value="{{$usuario->id}}">{{$usuario->name}}</option>
         @endforeach
     </select>
-    <!--<input type="text" class="form-control" name="nomeUsuario" id="nomeUsuario" maxlength="255">-->
 
-    <label for="livro_id">Nome Livro</label>
+    <label for="livro_id">Título Livro</label>
     <select class="form-control" name="livro_id" id="livro_id">
             <option value=""></option>
             @foreach ($livro as $livro)
             <option value="{{$livro->id}}">{{$livro->titulo}}</option>
             @endforeach
     </select>
-    <!--<input type="text" class="form-control" name="nomeLivro" id="nomeLivro" maxlength="255">-->
 
     <div class="row mt-2">
         <div class="col col-6">

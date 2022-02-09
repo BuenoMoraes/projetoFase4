@@ -23,7 +23,7 @@
 
 
     <div class="form-group" id="input-nomeLivro-reserva-{{ $reserva->id }}">
-        <label for="livro_id">Nome Livro</label>
+        <label for="livro_id">Título Livro</label>
         <select class="form-control" name="livro_id" id="livro_id">
             <option value="{{$reserva->livro_id}}">{{$livro->where('id', $reserva->livro_id)->pluck('titulo')->first()}}</option>
             <?php

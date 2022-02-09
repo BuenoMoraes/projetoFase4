@@ -24,8 +24,8 @@ class ReservasFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //'nomeUsuario' => 'required|min:3|max:255',
-            //'nomeLivro' => 'required|min:2|max:255',
+            'usuario_id' => 'required',
+            'livro_id' => 'required',
             'inicio' => 'required|min:10|max:10',
             'termino' => 'required|min:10|max:10'
         ];
@@ -35,8 +35,8 @@ class ReservasFormRequest extends FormRequest
     {
         return [
             'required' => 'O campo :attribute é obrigatório',
-            //'nomeUsuario.min' => 'O campo nome usuário precisa ter pelo menos 3 caracteres',
-            //'nomeLivro.min' => 'O campo nome Livro precisa ter pelo menos 2 caracteres',
+            'usuario_id.required' => 'O campo Nome Usuário é obrigatório',
+            'livro_id.required' => 'O campo Título Livro é obrigatório',
             'inicio.min' => 'O campo inicio precisa ter no mínimo 10 caracteres, siga o exemplo', 
             'inicio.max' => 'O campo inicio precisa ter no máximo 10 caracteres, siga o exemplo',
             'termino.min' => 'O campo termino precisa ter no mínimo 10 caracteres, siga o exemplo', 
