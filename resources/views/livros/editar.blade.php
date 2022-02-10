@@ -29,7 +29,13 @@
 
         <div class="col col-3" id="input-anoPublicacao-livro-{{ $livro->id }}">
             <label for="anoPublicacao">Ano Publicação</label>
-            <input type="text" class="form-control" name="anoPublicacao" id="anoPublicacao" maxlength="255" value="{{ $livro->anoPublicacao }}">
+            <?php $years = range(1800, strftime("%Y", time())); ?>
+                <select class="form-control" name="anoPublicacao" id="anoPublicacao">
+                    <option>{{ $livro->anoPublicacao }}</option>
+                    <?php foreach($years as $year) : ?>
+                    <option value="<?php echo $year; ?>"><?php echo $year; ?></option>
+                    <?php endforeach; ?>
+                </select>
         </div>
 
         <div class="col col-3" id="input-status-livro-{{ $livro->id }}">

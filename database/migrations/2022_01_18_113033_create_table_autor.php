@@ -28,6 +28,22 @@ class CreateTableAutor extends Migration
                 [
                     'id' => 2,
                     'autor' => 'Paulo Coelho'
+                ],
+                [
+                    'id' => 3,
+                    'autor' => 'Dustin Boswell'
+                ],
+                [
+                    'id' => 4,
+                    'autor' => 'Robert C. Martin'
+                ],
+                [
+                    'id' => 5,
+                    'autor' => 'Bob Martin'
+                ],
+                [
+                    'id' => 6,
+                    'autor' => 'J. K. Rowling'
                 ]
 
             ]

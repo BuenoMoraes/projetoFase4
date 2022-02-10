@@ -16,7 +16,8 @@ Usuários
 <ul class="list-group">
     @foreach($usuarios as $usuario)
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span id="name-usuario-{{ $usuario->id }}">Nome: {{$usuario->name}} <br> Email: {{$usuario->email}}</span>
+        <span id="name-usuario-{{ $usuario->id }}">ID Usuário: {{ $usuario->id }} 
+        </br>Nome: {{$usuario->name}} <br> Email: {{$usuario->email}}</span>
         <span id="email-usuario-{{ $usuario->id }}"></span>
 
         <span class="d-flex">

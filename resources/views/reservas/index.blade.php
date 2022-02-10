@@ -15,7 +15,8 @@ Reservas
 <ul class="list-group">
     @foreach($reservas as $reserva)
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span id="nomeUsuario-reserva-{{ $reserva->id }}"> Nome Usuário: {{$usuario->where('id', $reserva->usuario_id)->pluck('name')->first()}}
+        <span id="nomeUsuario-reserva-{{ $reserva->id }}">ID Reserva: {{ $reserva->id }} 
+        </br> Nome Usuário: {{$usuario->where('id', $reserva->usuario_id)->pluck('name')->first()}}
         </br>Título Livro: {{$livro->where('id', $reserva->livro_id)->pluck('titulo')->first()}}
         </br>Inicio:
         <?php
