@@ -40,7 +40,7 @@ class User extends Authenticatable
     public static function fetchPairs()
     {
         return self::query()
-        ->orderBy('name') 
+        ->orderBy('id') 
         ->get();
     }
 }

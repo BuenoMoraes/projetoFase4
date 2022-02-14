@@ -14,9 +14,7 @@ use Exception;
 class RegistroController extends Controller
 {
     public function index(Request $request) {
-        $usuarios = User::query()
-            ->orderBy('name')
-            ->get();
+        $usuarios = User::fetchPairs();
         $mensagem = $request->session()->get('mensagem');
 
         return view('registro.index', compact('usuarios', 'mensagem'));

@@ -20,13 +20,12 @@ class RegistroControllerAPI extends Controller
 
     public function store(Request $request)
     {
-       /* $user = resolve(User::class);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->save();
+        $data = $request->except('_token');
+        /*Criptografia*/ 
+        $data['password'] = Hash::make($data['password']);
+        $user = User::create($data);
 
-        return $user;*/
+        return $user;
     }
 
     public function show(int $id)
