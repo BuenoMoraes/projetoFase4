@@ -20,10 +20,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/livros', function(){
     return \App\Livro::all(); 
 });*/
-
-//$router->group(['middleware'=> 'auth'], function() use($router){
+Route::post('login', 'Api\\AuthController@login');
+$router->group(['middleware'=> ['apiJwt']], function() use($router){
     Route::apiResource('/livros', 'LivroControllerAPI');
     Route::apiResource('/reservas', 'ReservaControllerAPI');
     Route::apiResource('/registros', 'RegistroControllerAPI');
-    $router->post('/api/login', 'TokenController@gerarToken');
-   // });
+    Route::post('logout', 'Api\\AuthController@logout');
+});
