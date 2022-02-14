@@ -21,8 +21,9 @@ Route::get('/livros', function(){
     return \App\Livro::all(); 
 });*/
 
-
-Route::apiResource('/livros', 'LivroControllerAPI');
-Route::apiResource('/reservas', 'ReservaControllerAPI');
-Route::apiResource('/registros', 'RegistroControllerAPI');
-$router->post('/api/login', 'TokenController@gerarToken');
+//$router->group(['middleware'=> 'auth'], function() use($router){
+    Route::apiResource('/livros', 'LivroControllerAPI');
+    Route::apiResource('/reservas', 'ReservaControllerAPI');
+    Route::apiResource('/registros', 'RegistroControllerAPI');
+    $router->post('/api/login', 'TokenController@gerarToken');
+   // });
