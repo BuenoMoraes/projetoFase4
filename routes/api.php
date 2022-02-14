@@ -25,4 +25,4 @@ Route::get('/livros', function(){
 Route::apiResource('/livros', 'LivroControllerAPI');
 Route::apiResource('/reservas', 'ReservaControllerAPI');
 Route::apiResource('/registros', 'RegistroControllerAPI');
-
+$router->post('/api/login', 'TokenController@gerarToken');
