@@ -22,8 +22,9 @@ Route::get('/livros', function(){
 });*/
 Route::post('login', 'Api\\AuthController@login');
 $router->group(['middleware'=> ['apiJwt']], function() use($router){
+    Route::post('logout', 'Api\\AuthController@logout');
     Route::apiResource('/livros', 'LivroControllerAPI');
     Route::apiResource('/reservas', 'ReservaControllerAPI');
     Route::apiResource('/registros', 'RegistroControllerAPI');
-    Route::post('logout', 'Api\\AuthController@logout');
+    
 });
