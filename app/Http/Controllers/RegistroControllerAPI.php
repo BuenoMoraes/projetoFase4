@@ -13,48 +13,73 @@ use Exception;
 
 class RegistroControllerAPI extends Controller
 {
-    public function index(Request $request)
+    public function index(RegistrosFormRequest $request)
     {
         return User::all();
     }
 
-    public function store(Request $request)
+    public function store(RegistrosFormRequest $request)
     {
-        $data = $request->except('_token');
-        /*Criptografia*/ 
-        $data['password'] = Hash::make($data['password']);
-        $user = User::create($data);
-
-        return $user;
+        try{
+            $data = $request->except('_token');
+            /*Criptografia*/ 
+            $data['password'] = Hash::make($data['password']);
+            $user = User::create($data);
+    
+            return $user;
+        }
+        catch(Exception $exception){
+            return response()->json([
+                'erro' => $exception
+            ], 500);
+        }
+        
     }
 
     public function show(int $id)
     {
-        $recurso = User::find($id);
-        if (is_null($recurso)) {
-            return response()->json('', 204);
-        }
+        try{
+            $user = User::find($id);
+            if (is_null($user)) {
+                return response()->json('', 204);
+            }
 
-        return response()->json($recurso);
+            return response()->json($user);
+        }
+        catch(Exception $exception){
+            return response()->json([
+                'erro' => $exception
+            ], 500);
+        }
+        
     }
 
-    public function update(int $id, Request $request)
+    public function update(int $id, RegistrosFormRequest $request)
     {
-        $recurso = User::find($id);
-        if (is_null($recurso)) {
-            return response()->json([
-                'erro' => 'Recurso não encontrado'
-            ], 404);
+        try{
+            $user = User::find($id);
+            if (is_null($user)) {
+                return response()->json([
+                    'erro' => 'user não encontrado'
+                ], 404);
+            }
+            $user->fill($request->all());
+            $user->save();
+    
+            return $user;
         }
-        $recurso->fill($request->all());
-        $recurso->save();
-
-        return $recurso;
+        catch(Exception $exception){
+            return response()->json([
+                'erro' => $exception
+            ], 500);
+        }
+       
     }
 
     public function destroy(int $id)
     {
-        $qtdRecursosRemovidos = User::destroy($id);
+        try{
+            $qtdRecursosRemovidos = User::destroy($id);
         if ($qtdRecursosRemovidos === 0) {
             return response()->json([
                 'erro' => 'Recurso não encontrado'
@@ -62,5 +87,13 @@ class RegistroControllerAPI extends Controller
         }
 
         return response()->json('', 204);
+        }
+        catch(Exception $exception){
+            return response()->json([
+                'erro' => $exception
+            ], 500);
+        }
+        
+        
     }
 }

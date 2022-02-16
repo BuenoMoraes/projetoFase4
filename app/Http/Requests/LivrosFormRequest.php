@@ -26,7 +26,7 @@ class LivrosFormRequest extends FormRequest
         return [
             'titulo' => 'required|min:2',
             'anoPublicacao' => 'required|min:4',
-            'autor_id' => 'required',
+            'autor_id' => Rule::exist(Autor::class,'id'),
             'status_id' => 'required'
 
         ];
@@ -38,7 +38,8 @@ class LivrosFormRequest extends FormRequest
             'required' => 'O campo :attribute é obrigatório',
             'anoPublicacao.min' => 'O campo ano publicação precisa ter pelo menos 4 caracteres',
             'autor_id.required' => 'O campo autor é obrigatório',
-            'status_id.required' => 'O campo status é obrigatório'
+            'status_id.required' => 'O campo status é obrigatório',
+            //'autor_id.exists' => 'O campo autor é inexistente'
         ];
     }
 }
