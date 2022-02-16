@@ -26,7 +26,7 @@ class LivrosFormRequest extends FormRequest
         return [
             'titulo' => 'required|min:2',
             'anoPublicacao' => 'required|min:4',
-            'autor_id' => Rule::exist(Autor::class,'id'),
+            'autor_id' => Rule::exists(Autor::class,'id'),
             'status_id' => 'required'
 
         ];
