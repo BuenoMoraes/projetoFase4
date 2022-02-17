@@ -41,7 +41,7 @@ class RegistroControllerAPI extends Controller
         try{
             $user = User::find($id);
             if (is_null($user)) {
-                return response()->json('', 204);
+                return response()->json('Usuário não encontrado', 404);
             }
 
             return response()->json($user);
@@ -60,7 +60,7 @@ class RegistroControllerAPI extends Controller
             $user = User::find($id);
             if (is_null($user)) {
                 return response()->json([
-                    'erro' => 'user não encontrado'
+                    'erro' => 'Usuário não encontrado'
                 ], 404);
             }
             $user->fill($request->all());
@@ -82,11 +82,11 @@ class RegistroControllerAPI extends Controller
             $qtdRecursosRemovidos = User::destroy($id);
         if ($qtdRecursosRemovidos === 0) {
             return response()->json([
-                'erro' => 'Recurso não encontrado'
+                'erro' => 'Usuário não encontrado'
             ], 404);
         }
 
-        return response()->json('', 204);
+        return response()->json('Usuário não deletado', 204);
         }
         catch(Exception $exception){
             return response()->json([

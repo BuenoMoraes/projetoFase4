@@ -25,26 +25,35 @@ class CriadorDeLivro
 
     public function criarLivro(array $informacoes): Livro 
     {
-        $titulo = isset($informacoes['titulo']) ? $informacoes['titulo'] : null;
-        $autorId = $informacoes['autor_id'] ?? null;
-        $anoPublicacao = $informacoes['anoPublicacao'] ?? null;
-        $statusId = $informacoes['status_id'] ?? null;
+        try{
+            $titulo = isset($informacoes['titulo']) ? $informacoes['titulo'] : null;
+            $autorId = $informacoes['autor_id'] ?? null;
+            $anoPublicacao = $informacoes['anoPublicacao'] ?? null;
+            $statusId = $informacoes['status_id'] ?? null;
+            
+            $livrosFormRequest = resolve(LivrosFormRequest::class);
+            $validator = Validator::make($informacoes,  $livrosFormRequest->rules(), $livrosFormRequest->messages(), $livrosFormRequest->attributes() );
         
-        $livrosFormRequest = resolve(LivrosFormRequest::class);
+            /*if ($validator->fails()) {
+                $messages = [];
+                foreach($validator->messages()->getMessages() as $message) {
+                    $messages[] = $message[0];
+                }
 
-        $validator = Validator::make($informacoes, ['titulo' => 'required|min:2',
-        'anoPublicacao' => 'required|min:4',
-        'autor_id' => 'required|',
-        'status_id' => 'required']);
-    
-        if ($validator->fails()) {
-            throw new Exception("teste exception");
+                throw new Exception(join("", $messages));
+            }*/
+            DB::beginTransaction();
+            $livro = Livro::create(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId ]);
+            DB::commit();
+
+            return $livro;
+
         }
-        DB::beginTransaction();
-        $livro = Livro::create(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId ]);
-        DB::commit();
+        catch(Exception $exception){
 
-        return $livro;
+            throw new Exception($exception->getMessage());
+        
+        }
     }
    
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class LivrosFormRequest extends FormRequest
 {
@@ -26,8 +27,8 @@ class LivrosFormRequest extends FormRequest
         return [
             'titulo' => 'required|min:2',
             'anoPublicacao' => 'required|min:4',
-            'autor_id' => Rule::exists(Autor::class,'id'),
-            'status_id' => 'required'
+            'autor_id' => ['required', Rule::exists('autors','id')],
+            'status_id' => ['required', Rule::exists('statuses','id')]
 
         ];
     }
@@ -39,7 +40,17 @@ class LivrosFormRequest extends FormRequest
             'anoPublicacao.min' => 'O campo ano publicação precisa ter pelo menos 4 caracteres',
             'autor_id.required' => 'O campo autor é obrigatório',
             'status_id.required' => 'O campo status é obrigatório',
-            //'autor_id.exists' => 'O campo autor é inexistente'
+            'autor_id.exists' => 'O autor_id informado não possui nenhum autor cadastrado no sistema',
+            'status_id.exists' => 'O status_id informado não possui nenhum status cadastrado no sistema'
         ];
     }
+
+    public function attributes()
+    {
+        return [
+            'autor_id' => 'Autor'
+        ];
+    }
+
+    
 }

@@ -35,7 +35,7 @@ class LivroControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => $exception
+                'erro' => $exception->getMessage(),
             ], 500);
         }
     }
@@ -52,7 +52,7 @@ class LivroControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => 'Livro não encontrado'
+                'erro' => $exception->getMessage(),
             ], 500);
         }
        
@@ -75,7 +75,7 @@ class LivroControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => $exception
+                'erro' => $exception->getMessage(),
             ], 500);
         }
     }
@@ -86,7 +86,7 @@ class LivroControllerAPI extends Controller
             $qtdRecursosRemovidos = Livro::destroy($id);
             if ($qtdRecursosRemovidos === 0) {
                 return response()->json([
-                    'erro' => 'Recurso não encontrado'
+                    'erro' => 'Livro não encontrado'
                 ], 404);
             }
     
@@ -94,7 +94,7 @@ class LivroControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => 'Ocorreu um erro ao tentar executar a ação'
+                'erro' => $exception->getMessage(),
             ], 500);
         }
         

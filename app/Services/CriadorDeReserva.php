@@ -11,25 +11,32 @@ use App\Http\Requests\ReservasFormRequest;
 class CriadorDeReserva
 {
     public function criarReserva(array $informacoes): Reserva 
-    {
-        $usuarioId = isset($informacoes['usuario_id']) ? $informacoes['usuario_id'] : null;
-        $livroId = isset($informacoes['livro_id']) ? $informacoes['livro_id'] : null;
-        $inicio = $informacoes['inicio'] ?? null;
-        $termino = $informacoes['termino'] ?? null;
-        
-        $reservasFormRequest = resolve(ReservasFormRequest::class);
+    {   
+        try{
+            $usuarioId = isset($informacoes['usuario_id']) ? $informacoes['usuario_id'] : null;
+            $livroId = isset($informacoes['livro_id']) ? $informacoes['livro_id'] : null;
+            $inicio = $informacoes['inicio'] ?? null;
+            $termino = $informacoes['termino'] ?? null;
+            
+            $reservasFormRequest = resolve(ReservasFormRequest::class);
 
-        $validator = Validator::make($informacoes, $reservasFormRequest->rules());
-    
-        if ($validator->fails()) {
-            throw new Exception("teste exception");
+            $validator = Validator::make($informacoes, $reservasFormRequest->rules(), $reservasFormRequest->messages(), $reservasFormRequest->attributes());
+        
+            /*if ($validator->fails()) {
+                throw new Exception("teste exception");
+            }*/
+            
+            DB::beginTransaction();
+            $reserva = Reserva::create(['usuario_id' => $usuarioId, 'livro_id' => $livroId, 'inicio' => $inicio, 'termino' => $termino ]);
+            DB::commit();
+
+            return $reserva;
         }
-        
-        DB::beginTransaction();
-        $reserva = Reserva::create(['usuario_id' => $usuarioId, 'livro_id' => $livroId, 'inicio' => $inicio, 'termino' => $termino ]);
-        DB::commit();
+        catch(Exception $exception){
 
-        return $reserva;
+            throw new Exception($exception->getMessage());
+        
+        }
     }
 
 }

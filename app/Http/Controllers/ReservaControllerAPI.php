@@ -35,7 +35,7 @@ class ReservaControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => 'Recurso não encontrado'
+                'erro' => $exception->getMessage(),
             ], 500);
         }
        
@@ -46,14 +46,14 @@ class ReservaControllerAPI extends Controller
         try{
             $reserva = Reserva::find($id);
         if (is_null($reserva)) {
-            return response()->json('', 204);
+            return response()->json('Reserva não encontrada', 404);
         }
 
         return response()->json($reserva);
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => 'Reserva não encontrada'
+                'erro' => $exception->getMessage(),
             ], 500);
         }
         
@@ -75,7 +75,7 @@ class ReservaControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => 'Reserva não encontrada'
+                'erro' => $exception->getMessage(),
             ], 500);
         }
      
@@ -91,11 +91,11 @@ class ReservaControllerAPI extends Controller
                 ], 404);
             }
     
-            return response()->json('', 204);
+            return response()->json('Reserva excluída', 204);
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => 'Reserva não encontrada'
+                'erro' => $exception->getMessage(),
             ], 500);
         }
         
