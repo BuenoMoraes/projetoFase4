@@ -28,3 +28,5 @@ $router->group(['middleware'=> ['apiJwt']], function() use($router){
     Route::apiResource('/registros', 'RegistroControllerAPI');
     
 });
+
+Route::post('/registros', 'RegistroControllerAPI@store');

@@ -68,6 +68,7 @@ class ReservaControllerAPI extends Controller
                     'erro' => 'Reserva não encontrada'
                 ], 404);
             }
+            
             $reserva->fill($request->all());
             $reserva->save();
     

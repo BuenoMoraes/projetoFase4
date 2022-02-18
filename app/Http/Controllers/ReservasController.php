@@ -38,6 +38,7 @@ class ReservasController extends Controller
         ReservasFormRequest $request,
         CriadorDeReserva $criadorDeReserva 
     ) {
+
         $usuario = User::fetchPairs();
         $livro = Livro::fetchPairs();
         $reserva  = $criadorDeReserva->criarReserva([
