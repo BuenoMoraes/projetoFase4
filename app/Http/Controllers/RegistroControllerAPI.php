@@ -30,7 +30,7 @@ class RegistroControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => $exception
+                'erro' => $exception->getMessage(),
             ], 500);
         }
         
@@ -48,7 +48,7 @@ class RegistroControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => $exception
+                'erro' => $exception->getMessage(),
             ], 500);
         }
         
@@ -70,7 +70,7 @@ class RegistroControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => $exception
+                'erro' => $exception->getMessage(),
             ], 500);
         }
        
@@ -90,7 +90,7 @@ class RegistroControllerAPI extends Controller
         }
         catch(Exception $exception){
             return response()->json([
-                'erro' => $exception
+                'erro' => $exception->getMessage(),
             ], 500);
         }
         

@@ -17,7 +17,7 @@ class CreateTabelaReservas extends Migration
         Schema::create($this->tableName, function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('usuario_id')->unsigned();
-            $table->foreign('usuario_id')->references('id')->on('users');
+            $table->foreign('usuario_id')->references('id')->on('users')->onDelete('cascade');
             $table->bigInteger('livro_id')->unsigned();
             $table->foreign('livro_id')->references('id')->on('livros')->onDelete('cascade');
             $table->date('inicio');

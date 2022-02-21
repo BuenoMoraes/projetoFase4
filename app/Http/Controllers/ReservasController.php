@@ -15,10 +15,7 @@ use Exception;
 class ReservasController extends Controller
 {
     public function index(Request $request) {
-        $reservas = Reserva::query()
-            ->orderBy('usuario_id')
-            ->get();
-
+        $reservas = Reserva::fetchPairs();
         $usuario = User::fetchPairs();
         $livro = Livro::fetchPairs();
         
