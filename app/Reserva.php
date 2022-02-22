@@ -12,7 +12,7 @@ class Reserva extends Model
     public static function fetchPairs()
     {
         return self::query()
-        ->orderBy('usuario_id') 
+        ->orderBy('id') 
         ->get();
     }
 
