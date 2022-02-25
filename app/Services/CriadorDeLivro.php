@@ -10,22 +10,10 @@ use App\Http\Requests\LivrosFormRequest;
 
 class CriadorDeLivro
 {
-    /*public function criarLivro(
-        string $titulo,
-        string $autor,
-        string $anoPublicacao,
-        string $statusLivro
-    ): Livro {
-        DB::beginTransaction();
-        $livro = Livro::create(['titulo' => $titulo, 'autor' => $autor, 'anoPublicacao' => $anoPublicacao, 'statusLivro' => $statusLivro ]);
-        DB::commit();
-
-        return $livro;
-    }*/
-
-    public function criarLivro(array $informacoes): Livro 
+    public function salvarLivro(array $informacoes): Livro 
     {
         try{
+            $id = $informacoes['id'] ?? null;
             $titulo = isset($informacoes['titulo']) ? $informacoes['titulo'] : null;
             $autorId = $informacoes['autor_id'] ?? null;
             $anoPublicacao = $informacoes['anoPublicacao'] ?? null;
@@ -34,16 +22,16 @@ class CriadorDeLivro
             $livrosFormRequest = resolve(LivrosFormRequest::class);
             $validator = Validator::make($informacoes,  $livrosFormRequest->rules(), $livrosFormRequest->messages(), $livrosFormRequest->attributes() );
         
-            /*if ($validator->fails()) {
-                $messages = [];
-                foreach($validator->messages()->getMessages() as $message) {
-                    $messages[] = $message[0];
-                }
-
-                throw new Exception(join("", $messages));
-            }*/
             DB::beginTransaction();
-            $livro = Livro::create(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId ]);
+            if(!$id){
+                $livro = Livro::create(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId ]);
+            } else {
+                Livro::where('id', $id)
+                ->update(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId]);
+
+                $livro = Livro::find($id);
+
+            }
             DB::commit();
 
             return $livro;

@@ -40,7 +40,7 @@ class LivrosController extends Controller
         LivrosFormRequest $request,
         CriadorDeLivro $criadorDeLivro 
     ) {
-        $livro  = $criadorDeLivro->criarLivro([
+        $livro  = $criadorDeLivro->salvarLivro([
             'titulo' => $request->titulo,
             'autor_id' => $request->autor_id,
             'anoPublicacao' => $request->anoPublicacao,

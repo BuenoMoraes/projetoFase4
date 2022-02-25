@@ -10,9 +10,10 @@ use App\Http\Requests\ReservasFormRequest;
 
 class CriadorDeReserva
 {
-    public function criarReserva(array $informacoes): Reserva 
+    public function salvarReserva(array $informacoes): Reserva 
     {   
         try{
+            $id = $informacoes['id'] ?? null;
             $usuarioId = isset($informacoes['usuario_id']) ? $informacoes['usuario_id'] : null;
             $livroId = isset($informacoes['livro_id']) ? $informacoes['livro_id'] : null;
             $inicio = $informacoes['inicio'] ?? null;
@@ -22,12 +23,16 @@ class CriadorDeReserva
 
             $validator = Validator::make($informacoes, $reservasFormRequest->rules(), $reservasFormRequest->messages(), $reservasFormRequest->attributes());
         
-            /*if ($validator->fails()) {
-                throw new Exception("teste exception");
-            }*/
-            
             DB::beginTransaction();
-            $reserva = Reserva::create(['usuario_id' => $usuarioId, 'livro_id' => $livroId, 'inicio' => $inicio, 'termino' => $termino ]);
+            if(!$id){
+                $reserva = Reserva::create(['usuario_id' => $usuarioId, 'livro_id' => $livroId, 'inicio' => $inicio, 'termino' => $termino ]);
+            } else {
+                Reserva::where('id', $id)
+                ->update(['usuario_id' => $usuarioId, 'livro_id' => $livroId, 'inicio' => $inicio, 'termino' => $termino]);
+
+                $reserva = Reserva::find($id);
+
+            }
             DB::commit();
 
             return $reserva;

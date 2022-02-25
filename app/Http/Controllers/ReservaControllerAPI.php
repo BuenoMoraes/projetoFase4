@@ -24,7 +24,7 @@ class ReservaControllerAPI extends Controller
         try{
             $criadorDeReserva = resolve(CriadorDeReserva::class);
 
-            $reserva  = $criadorDeReserva->criarReserva([
+            $reserva  = $criadorDeReserva->salvarReserva([
                 'usuario_id' => $request->usuario_id,
                 'livro_id' => $request->livro_id,
                 'inicio' => $request->inicio,
@@ -62,15 +62,15 @@ class ReservaControllerAPI extends Controller
     public function update(int $id, Request $request)
     {
         try{
-            $reserva = Reserva::find($id);
-            if (is_null($reserva)) {
-                return response()->json([
-                    'erro' => 'Reserva não encontrada'
-                ], 404);
-            }
-            
-            $reserva->fill($request->all());
-            $reserva->save();
+            $criadorDeReserva = resolve(CriadorDeReserva::class);
+
+            $reserva  = $criadorDeReserva->salvarReserva([
+                'id' => $id,
+                'usuario_id' => $request->usuario_id,
+                'livro_id' => $request->livro_id,
+                'inicio' => $request->inicio,
+                'termino' => $request->termino
+            ]);
     
             return $reserva;
         }

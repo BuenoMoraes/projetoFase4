@@ -38,7 +38,7 @@ class ReservasController extends Controller
 
         $usuario = User::fetchPairs();
         $livro = Livro::fetchPairs();
-        $reserva  = $criadorDeReserva->criarReserva([
+        $reserva  = $criadorDeReserva->salvarReserva([
             'usuario_id' => $request->usuario_id,
             'livro_id' => $request->livro_id,
             'inicio' => $request->inicio,

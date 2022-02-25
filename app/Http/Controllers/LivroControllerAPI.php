@@ -24,7 +24,7 @@ class LivroControllerAPI extends Controller
         try{
             $criadorDelivro = resolve(CriadorDeLivro::class);
 
-            $livro  = $criadorDelivro->criarLivro([
+            $livro  = $criadorDelivro->salvarLivro([
                 'titulo' => $request->titulo,
                 'autor_id' => $request->autor_id,
                 'anoPublicacao' => $request->anoPublicacao,
@@ -62,14 +62,16 @@ class LivroControllerAPI extends Controller
     public function update(int $id, Request $request)
     {
         try{
-            $livro = Livro::find($id);
-            if (is_null($livro)) {
-                return response()->json([
-                    'erro' => 'Livro não encontrado'
-                ], 404);
-            }
-            $livro->fill($request->all());
-            $livro->save();
+            $criadorDelivro = resolve(CriadorDeLivro::class);
+
+            $livro  = $criadorDelivro->salvarLivro([
+                'id' => $id,
+                'titulo' => $request->titulo,
+                'autor_id' => $request->autor_id,
+                'anoPublicacao' => $request->anoPublicacao,
+                'status_id' => $request->status_id
+            ]);
+    
 
             return $livro;
         }
