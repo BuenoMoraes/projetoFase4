@@ -45,10 +45,6 @@
             </select>
         </div>
     </div>
-    <div class="form-group">
-        <label for="image">Imagens:</label>
-        <input type="file" class="form-control-file" name="image" id="image" placeholder="Escolha a imagem do livro">
-    </div>
 
     <button class="btn btn-primary mt-2">Adicionar</button>
 </form>
