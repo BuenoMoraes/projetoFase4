@@ -9,7 +9,7 @@
 <!--{{var_dump($autor)}}-->
 
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     @csrf
     <label for="titulo">Título</label>
     <input type="text" class="form-control" name="titulo" id="titulo" maxlength="255">
@@ -44,6 +44,10 @@
                 @endforeach
             </select>
         </div>
+    </div>
+    <div class="form-group">
+        <label for="image">Imagens:</label>
+        <input type="file" class="form-control-file" name="image" id="image" placeholder="Escolha a imagem do livro">
     </div>
 
     <button class="btn btn-primary mt-2">Adicionar</button>

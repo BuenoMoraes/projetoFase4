@@ -47,6 +47,19 @@ class LivrosController extends Controller
             'status_id' => $request->status_id
         ]);
 
+        // teste upload imagem
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $requestImage = $request->image;
+
+            $extension = $requestImage->extension();
+
+            $imageName = md5($requestImage->image->getClientOriginalName() . strtotime("now"));
+
+            $request->image->move(public_path('img/livros'), $imageName);
+
+            $event->image = $imageName;
+        }
+
             $request->session()
             ->flash(
                 'mensagem',
