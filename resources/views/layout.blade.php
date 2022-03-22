@@ -14,6 +14,7 @@
         <a class="navbar navbar-expand-lg" href="{{ route('listar_livros') }}">Livros</a>
         <a class="navbar navbar-expand-lg" href="{{ route('listar_reservas') }}">Reservas</a>
         <a class="navbar navbar-expand-lg" href="{{ route('listar_usuarios') }}">Usuários</a>
+        <a class="navbar navbar-expand-lg" href="{{ route('form_fazer_upload') }}">imagem</a>
         
         @auth
             <a href="/sair" class="text-danger">Sair</a>

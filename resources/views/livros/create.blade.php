@@ -11,6 +11,13 @@
 
 <form method="post" enctype="multipart/form-data">
     @csrf
+    <div class="row mt-2">
+        <div class="col col-12">
+            <label for="image">Imagem Livro:</label>
+            <input type="file" name="image" id="image">
+        </div>
+    </div> 
+
     <label for="titulo">Título</label>
     <input type="text" class="form-control" name="titulo" id="titulo" maxlength="255">
 
@@ -45,6 +52,8 @@
             </select>
         </div>
     </div>
+
+    
 
     <button class="btn btn-primary mt-2">Adicionar</button>
 </form>

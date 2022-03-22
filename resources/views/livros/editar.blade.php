@@ -7,8 +7,15 @@
 @section('conteudo')
 @include('erros', ['errors' => $errors])
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     @csrf
+    <div class="row mt-2">
+        <div class="col col-12">
+            <label for="image">Imagem Livro:</label>
+            <input type="file" name="image" id="image">
+        </div>
+    </div> 
+
     <div class="form-group" id="input-titulo-livro-{{ $livro->id }}">
         <label for="titulo">Título</label>
         <input type="text" class="form-control" name="titulo" id="titulo" maxlength="255" value="{{ $livro->titulo }}">

@@ -10,6 +10,7 @@ use App\Status;
 use App\Autor;
 use Illuminate\Http\Request;
 use Exception;
+use Illuminate\Support\Facades\File;
 
 
 class LivrosController extends Controller
@@ -40,12 +41,26 @@ class LivrosController extends Controller
         LivrosFormRequest $request,
         CriadorDeLivro $criadorDeLivro 
     ) {
+        $image = null;
+
+        if($request->hasFile('image'))
+        {
+             $image = $request->file('image')->store('livro');
+        }
+
+
         $livro  = $criadorDeLivro->salvarLivro([
             'titulo' => $request->titulo,
             'autor_id' => $request->autor_id,
             'anoPublicacao' => $request->anoPublicacao,
-            'status_id' => $request->status_id
+            'status_id' => $request->status_id,
+            'image' => $image
         ]);
+
+        
+
+        $livro->save();
+
         
         $request->session()
             ->flash(
@@ -93,10 +108,28 @@ class LivrosController extends Controller
         $novoAnoPublicacao = $request->anoPublicacao;
         $novoStatusLivro = $request->status_id;
 
+
+        if($request->hasFile('image'))
+        {
+            $destination = 'storage/'.$livro->image;
+            if(File::exists($destination))
+            {
+                File::Delete($destination);
+            }
+    
+
+            $novaImagem = $request->file('image')->store('livro');
+            $livro->image = $novaImagem;
+        }else{
+            $livro->image = $livro->image;
+        }
+
         $livro->titulo = $novoTitulo;
         $livro->autor_id = $novoAutor;
         $livro->anoPublicacao = $novoAnoPublicacao;
         $livro->status_id = $novoStatusLivro;
+       
+        
            
    
         $livro->save();

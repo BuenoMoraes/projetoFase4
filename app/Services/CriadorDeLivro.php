@@ -18,16 +18,17 @@ class CriadorDeLivro
             $autorId = $informacoes['autor_id'] ?? null;
             $anoPublicacao = $informacoes['anoPublicacao'] ?? null;
             $statusId = $informacoes['status_id'] ?? null;
+            $image = isset($informacoes['image']) ? $informacoes['image'] : null;
             
             $livrosFormRequest = resolve(LivrosFormRequest::class);
             $validator = Validator::make($informacoes,  $livrosFormRequest->rules(), $livrosFormRequest->messages(), $livrosFormRequest->attributes() );
         
             DB::beginTransaction();
             if(!$id){
-                $livro = Livro::create(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId ]);
+                $livro = Livro::create(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId, 'image' => $image ]);
             } else {
                 Livro::where('id', $id)
-                ->update(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId]);
+                ->update(['titulo' => $titulo, 'autor_id' => $autorId, 'anoPublicacao' => $anoPublicacao, 'status_id' => $statusId, 'image' => $image]);
 
                 $livro = Livro::find($id);
 

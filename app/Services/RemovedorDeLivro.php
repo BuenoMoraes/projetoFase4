@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\{Livro, Autor};
 use Illuminate\Support\Facades\DB;
+use Storage;
 
 class RemovedorDeLivro
 {
@@ -16,6 +17,10 @@ class RemovedorDeLivro
             $anoPublicacaoLivro = $livro->anoPublicacao;
             $statusLivroLivro = $livro->statusLivro;
             $livro->delete();
+            if($livro->image)
+            {
+                Storage::delete($livro->image);
+            }
         });
 
         return $tituloLivro;

@@ -15,11 +15,17 @@ Lívros
 <ul class="list-group">
     @foreach($livros as $livro)
     <li class="list-group-item d-flex justify-content-between align-items-center">
-        <span id="status-livro-{{ $livro->id }}">ID Lívro: {{ $livro->id }} 
-        </br>Título: {{ $livro->titulo }} 
-        </br>Autor: {{$autor->where('id', $livro->autor_id)->pluck('autor')->first()}}
-        <br>Ano Publicação: {{ $livro->anoPublicacao }}
-        </br>Status Livro: {{ $status->where('id', $livro->status_id)->pluck('status')->first()}}</span>
+        <div>
+            <div class="row"> 
+                <img src="{{$livro->image_url}}" class="img-thumbnail mr-3" height="200px" width="200px">
+                <span id="status-livro-{{ $livro->id }}">ID Lívro: {{ $livro->id }} 
+                </br>Título: {{ $livro->titulo }} 
+                </br>Autor: {{$autor->where('id', $livro->autor_id)->pluck('autor')->first()}}
+                <br>Ano Publicação: {{ $livro->anoPublicacao }}
+                </br>Status Livro: {{ $status->where('id', $livro->status_id)->pluck('status')->first()}}</span>
+            </div>
+        </div>
+        
         <span class="d-flex">
             @auth
             <a class="btn btn-info btn-sm mr-1" href="/livros/edit/{{ $livro->id }}">

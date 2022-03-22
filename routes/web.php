@@ -30,6 +30,12 @@ Route::get('/reservas/criar', 'ReservasController@create')
     ->name('form_criar_reserva')
     ->middleware('autenticador');
 
+// Rotas imagens
+Route::get('/form','UploadController@index')
+    ->name('form_fazer_upload');
+Route::post('upload','UploadController@upload')
+    ->name('upload');
+
 /*Rotas Adicionar valores ao banco*/
 Route::post('/livros/criar', 'LivrosController@store')
     ->middleware('autenticador');

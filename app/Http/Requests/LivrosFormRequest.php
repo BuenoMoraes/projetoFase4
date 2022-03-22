@@ -28,7 +28,8 @@ class LivrosFormRequest extends FormRequest
             'titulo' => 'required|min:2',
             'anoPublicacao' => 'required|min:4',
             'autor_id' => ['required', Rule::exists('autors','id')],
-            'status_id' => ['required', Rule::exists('statuses','id')]
+            'status_id' => ['required', Rule::exists('statuses','id')],
+            'image' => 'nullable'
 
         ];
     }
